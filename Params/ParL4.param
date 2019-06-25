@@ -1,0 +1,123 @@
+<Dinver>
+  <pluginTag>DispersionCurve</pluginTag>
+  <pluginTitle>Surface Wave Inversion</pluginTitle>
+  <ParamGroundModel>
+    <ParamProfile>
+      <type>Param</type>
+      <longName>Compression-wave velocity</longName>
+      <shortName>Vp</shortName>
+      <unit>m/s</unit>
+      <defaultMinimum>200</defaultMinimum>
+      <defaultMaximum>5000</defaultMaximum>
+      <defaultCondition>LessThan</defaultCondition>
+      <ParamLayer name="Vp0">
+        <shape>Uniform</shape>
+        <lastParamCondition>true</lastParamCondition>
+        <nSubayers>5</nSubayers>
+        <topMin>120</topMin>
+        <topMax>6000</topMax>
+        <linkedTo>Not linked</linkedTo>
+        <isDepth>true</isDepth>
+        <dhMin>0.5</dhMin>
+        <dhMax>50</dhMax>
+      </ParamLayer>
+    </ParamProfile>
+    <ParamProfile>
+      <type>Condition</type>
+      <longName>Poisson&apos;s Ratio</longName>
+      <shortName>Nu</shortName>
+      <unit></unit>
+      <defaultMinimum>0.2000000000000000111</defaultMinimum>
+      <defaultMaximum>0.5</defaultMaximum>
+      <defaultCondition>GreaterThan</defaultCondition>
+      <ParamLayer name="Nu0">
+        <shape>Uniform</shape>
+        <lastParamCondition>true</lastParamCondition>
+        <nSubayers>5</nSubayers>
+        <topMin>0.2</topMin>
+        <topMax>0.5</topMax>
+        <linkedTo>Not linked</linkedTo>
+        <isDepth>true</isDepth>
+        <dhMin>50</dhMin>
+        <dhMax>50</dhMax>
+      </ParamLayer>
+    </ParamProfile>
+    <ParamProfile>
+      <type>Param</type>
+      <longName>Shear-wave velocity</longName>
+      <shortName>Vs</shortName>
+      <unit>m/s</unit>
+      <defaultMinimum>150</defaultMinimum>
+      <defaultMaximum>3500</defaultMaximum>
+      <defaultCondition>LessThan</defaultCondition>
+      <ParamLayer name="Vs0">
+        <shape>Uniform</shape>
+        <lastParamCondition>false</lastParamCondition>
+        <nSubayers>5</nSubayers>
+        <topMin>60</topMin>
+        <topMax>1500</topMax>
+        <linkedTo>Not linked</linkedTo>
+        <isDepth>true</isDepth>
+        <dhMin>0.5</dhMin>
+        <dhMax>50</dhMax>
+      </ParamLayer>
+      <ParamLayer name="Vs1">
+        <shape>Uniform</shape>
+        <lastParamCondition>false</lastParamCondition>
+        <nSubayers>5</nSubayers>
+        <topMin>60</topMin>
+        <topMax>1500</topMax>
+        <linkedTo>Not linked</linkedTo>
+        <isDepth>false</isDepth>
+        <dhMin>0.5</dhMin>
+        <dhMax>50</dhMax>
+      </ParamLayer>
+      <ParamLayer name="Vs2">
+        <shape>Uniform</shape>
+        <lastParamCondition>false</lastParamCondition>
+        <nSubayers>5</nSubayers>
+        <topMin>60</topMin>
+        <topMax>1500</topMax>
+        <linkedTo>Not linked</linkedTo>
+        <isDepth>false</isDepth>
+        <dhMin>0.5</dhMin>
+        <dhMax>50</dhMax>
+      </ParamLayer>
+      <ParamLayer name="Vs3">
+        <shape>Uniform</shape>
+        <lastParamCondition>false</lastParamCondition>
+        <nSubayers>5</nSubayers>
+        <topMin>60</topMin>
+        <topMax>1500</topMax>
+        <linkedTo>Not linked</linkedTo>
+        <isDepth>false</isDepth>
+        <dhMin>0.5</dhMin>
+        <dhMax>50</dhMax>
+      </ParamLayer>
+    </ParamProfile>
+    <ParamProfile>
+      <type>Param</type>
+      <longName>Density</longName>
+      <shortName>Rho</shortName>
+      <unit>kg/m3</unit>
+      <defaultMinimum>2000</defaultMinimum>
+      <defaultMaximum>2000</defaultMaximum>
+      <defaultCondition>LessThan</defaultCondition>
+      <ParamLayer name="Rho0">
+        <shape>Uniform</shape>
+        <lastParamCondition>true</lastParamCondition>
+        <nSubayers>5</nSubayers>
+        <topMin>2000</topMin>
+        <topMax>2000</topMax>
+        <linkedTo>Not linked</linkedTo>
+        <isDepth>true</isDepth>
+        <dhMin>1</dhMin>
+        <dhMax>100</dhMax>
+      </ParamLayer>
+    </ParamProfile>
+    <ParamSpaceScript>
+      <text>linear("HVs1", ">" ,1.1,"DVs0",0);
+linear("HVs2", ">" ,1.1,"HVs1",0);</text>
+    </ParamSpaceScript>
+  </ParamGroundModel>
+</Dinver>

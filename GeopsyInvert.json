@@ -1,0 +1,303 @@
+{
+  "name":"GeopsyInvert",
+  "parallelism":"SERIAL",
+  "version":"1.0.0",
+  "label":"GeopsyInvert",
+  "shortDescription":"GeopsyInvert is an application to rapidly perform multiple global-search inversions as implemented in the open-source software Geopsy (www.Geopsy.org)",
+  "longDescription":"GeopsyInvert is an application to rapidly perform multiple global-search inversions of experimental dispersion data with measures of uncertainty using the neighborhood algorithm as implemented in the open-source software Geopsy (www.Geopsy.org). UTinvert allows the user to rapidly and conveniently consider multiple inversion parameterizations to address the problem’s non-uniqueness, multiple starting seed values to address the problem’s nonlinearity, and in the future (developments on-going) a method to address how to best propagate the experimental dispersion data’s uncertainty into the resulting shear wave velocity profiles.",
+  "helpURI":"http://www.Geopsy.org",
+  "appCategory": "Partner Data Apps",
+  "defaultMemory":92,
+  "defaultMemoryPerNode":92,
+  "defaultNodeCount":1,
+  "defaultProcessors":16,
+  "defaultProcessorsPerNode":16,
+  "defaultQueue":"normal",
+  "defaultMaxRunTime": "48:00:00",
+  "deploymentPath":"####",
+  "deploymentSystem":"designsafe.storage.default",
+  "executionSystem":"designsafe.community.exec.stampede2.nores",
+  "executionType":"HPC",
+  "templatePath":"wrapper.sh",
+  "testPath":"test/test.sh",
+  "checkpointable":false,
+  "modules":[],
+  "tags":[
+    "DesignSafe",
+    "hazards",
+    "NHERI",
+    "desktop",
+    "geospy"
+  ],
+  "ontology":[
+  ],
+  "inputs":[
+    {
+      "id":"workingDirectory",
+      "value":{
+        "validator" : "",
+        "visible" : true,
+        "required" : true,
+        "order" : 0,
+        "enquote" : false,
+        "default" : "agave://designsafe.storage.default/"
+      },
+      "details":{
+        "label":"Location of Working Directory",
+        "description":"The directory containing the subdirectories Params and Targets. You can drag the link for the directory from the Data Browser on the left, or click the 'Select Input' button and then select the directory.",
+        "argument":null,
+        "showArgument":false,
+        "repeatArgument":false
+      },
+      "semantics":{
+	    "minCardinality" : 1,
+        "maxCardinality" : 1,
+        "ontology":[
+          "xsd:string"
+        ],
+        "minCardinality":1,
+        "maxCardinality":1,
+        "fileTypes":[
+          "raw-0"
+        ]
+      }
+    }
+  ],
+  "parameters" : [ 
+	  {
+    "id" : "Sd",
+    "value" : {
+      "validator": "",
+      "visible" : true,
+      "required" : true,
+      "order" : 0,
+      "enquote" : false,
+      "default" : "",
+      "type" : "int"
+    },
+    "details" : {
+      "label" : "Number of seeds",
+      "description" : "Number (positive integer) of starting seeds to attempt.",
+      "argument" : null,
+      "showArgument" : false,
+      "repeatArgument" : false
+    },
+    "semantics": {
+        "ontology": [
+          "xs:string"
+        ],
+        "minCardinality": 1,
+        "maxCardinality": 1
+    }
+  },
+	  {
+    "id" : "It",
+    "value" : {
+      "validator": "",
+      "visible" : true,
+      "required" : true,
+      "order" : 0,
+      "enquote" : false,
+      "default" : "",
+      "type" : "int"
+    },
+    "details" : {
+      "label" : "Number of iterations",
+      "description" : "Number (positive integer) of iterations to perform.",
+      "argument" : null,
+      "showArgument" : false,
+      "repeatArgument" : false
+    },
+    "semantics": {
+        "ontology": [
+          "xs:string"
+        ],
+        "minCardinality": 1,
+        "maxCardinality": 1
+    }
+  },
+	  {
+    "id" : "N0",
+    "value" : {
+      "validator": "",
+      "visible" : true,
+      "required" : true,
+      "order" : 0,
+      "enquote" : false,
+      "default" : "",
+      "type" : "int"
+    },
+    "details" : {
+      "label" : "Number of initial random samples",
+      "description" : "Number (positive integer) of randomly sampled profiles to attempt before first iteration.",
+      "argument" : null,
+      "showArgument" : false,
+      "repeatArgument" : false
+    },
+    "semantics": {
+        "ontology": [
+          "xs:string"
+        ],
+        "minCardinality": 1,
+        "maxCardinality": 1
+    }
+  },
+	  {
+    "id" : "Nr",
+    "value" : {
+      "validator": "",
+      "visible" : true,
+      "required" : true,
+      "order" : 0,
+      "enquote" : false,
+      "default" : "",
+      "type" : "int"
+    },
+    "details" : {
+      "label" : "Number of profiles to consider when resampling",
+      "description" : "Number (positive integer) of best profiles to consider when resampling.",
+      "argument" : null,
+      "showArgument" : false,
+      "repeatArgument" : false
+    },
+    "semantics": {
+        "ontology": [
+          "xs:string"
+        ],
+        "minCardinality": 1,
+        "maxCardinality": 1
+    }
+  },
+	  {
+    "id" : "Ns",
+    "value" : {
+      "validator": "",
+      "visible" : true,
+      "required" : true,
+      "order" : 0,
+      "enquote" : false,
+      "default" : "",
+      "type" : "int"
+    },
+    "details" : {
+      "label" : "Number of profiles per iteration",
+      "description" : "Number (positive integer) of new profiles to consider per iteration.",
+      "argument" : null,
+      "showArgument" : false,
+      "repeatArgument" : false
+    },
+    "semantics": {
+        "ontology": [
+          "xs:string"
+        ],
+        "minCardinality": 1,
+        "maxCardinality": 1
+    }
+  },
+	  {
+    "id" : "Np",
+    "value" : {
+      "validator": "",
+      "visible" : true,
+      "required" : true,
+      "order" : 0,
+      "enquote" : false,
+      "default" : "",
+      "type" : "int"
+    },
+    "details" : {
+      "label" : "Number of profiles/dispersion curves to export",
+      "description" : "Number (positive integer) of profiles/dispersion curves to export for each seed.",
+      "argument" : null,
+      "showArgument" : false,
+      "repeatArgument" : false
+    },
+    "semantics": {
+        "ontology": [
+          "xs:string"
+        ],
+        "minCardinality": 1,
+        "maxCardinality": 1
+    }
+  },
+	  {
+    "id" : "Fnum",
+    "value" : {
+      "validator": "",
+      "visible" : true,
+      "required" : true,
+      "order" : 0,
+      "enquote" : false,
+      "default" : "",
+      "type" : "int"
+    },
+    "details" : {
+      "label" : "Number of frequency points in exported dispersion curve(s).",
+      "description" : "Number (positive integer) of frequency point in the exported dispersion curve(s).",
+      "argument" : null,
+      "showArgument" : false,
+      "repeatArgument" : false
+    },
+    "semantics": {
+        "ontology": [
+          "xs:string"
+        ],
+        "minCardinality": 1,
+        "maxCardinality": 1
+    }
+  },
+	  {
+    "id" : "Fmin",
+    "value" : {
+      "validator": "",
+      "visible" : true,
+      "required" : true,
+      "order" : 0,
+      "enquote" : false,
+      "default" : "",
+      "type" : "float"
+    },
+    "details" : {
+      "label" : "Minimum frequency of exported dispersion curve(s) in Hz",
+      "description" : "Number (positive float) for minimum frequency of exported dispersion curve(s) in Hz.",
+      "argument" : null,
+      "showArgument" : false,
+      "repeatArgument" : false
+    },
+    "semantics": {
+        "ontology": [
+          "xs:string"
+        ],
+        "minCardinality": 1,
+        "maxCardinality": 1
+    }
+  },
+  {
+    "id" : "Fmax",
+    "value" : {
+      "validator": "",
+      "visible" : true,
+      "required" : true,
+      "order" : 0,
+      "enquote" : false,
+      "default" : "",
+      "type" : "float"
+    },
+    "details" : {
+      "label" : "Maximum frequency of exported dispersion curve(s) in Hz",
+      "description" : "Number (positive float) for maximum frequency of exported dispersion curve(s) in Hz.",
+      "argument" : null,
+      "showArgument" : false,
+      "repeatArgument" : false
+    },
+    "semantics": {
+        "ontology": [
+          "xs:string"
+        ],
+        "minCardinality": 1,
+        "maxCardinality": 1
+    }
+  }
+   ],
+  "outputs" : [ ]
+}

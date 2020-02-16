@@ -1,7 +1,7 @@
 {
 	"name": "GeopsyInvert",
 	"parallelism": "SERIAL",
-	"version": "1.0.0",
+	"version": "0.2.0",
 	"label": "GeopsyInvert",
 	"shortDescription": "GeopsyInvert is an application to rapidly perform multiple global-search inversions as implemented in the open-source software Geopsy (www.Geopsy.org)",
 	"longDescription": "GeopsyInvert is an application to rapidly perform multiple global-search inversions of experimental dispersion data with measures of uncertainty using the neighborhood algorithm as implemented in the open-source software Geopsy (www.Geopsy.org). UTinvert allows the user to rapidly and conveniently consider multiple inversion parameterizations to address the problem’s non-uniqueness, multiple starting seed values to address the problem’s nonlinearity, and in the future (developments on-going) a method to address how to best propagate the experimental dispersion data’s uncertainty into the resulting shear wave velocity profiles.",
@@ -14,7 +14,7 @@
 	"defaultProcessorsPerNode": 16,
 	"defaultQueue": "normal",
 	"defaultMaxRunTime": "48:00:00",
-	"deploymentPath": "hgurram/geopsyinvent",
+	"deploymentPath": "hgurram/geopsyinvert",
 	"deploymentSystem": "designsafe.storage.default",
 	"executionSystem": "designsafe.community.exec.stampede2.nores",
 	"executionType": "HPC",

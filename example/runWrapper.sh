@@ -9,4 +9,4 @@
 #SBATCH -A DesignSafe-BCox-UTAu
 #SBATCH --mail-user=jvantassel@utexas.edu
 #SBATCH --mail-type=all
-./wrapper.sh
+./GeopsyInvert.sh

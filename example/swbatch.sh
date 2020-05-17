@@ -1,4 +1,4 @@
-# SWbatch v0.2.0
+# SWbatch v0.2.1
 
 # Inputs
 workingDirectory="."

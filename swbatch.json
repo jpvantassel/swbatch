@@ -1,7 +1,7 @@
 {
 	"name": "swbatch",
 	"parallelism": "SERIAL",
-	"version": "0.2.0",
+	"version": "0.2.1",
 	"label": "SWbatch",
 	"shortDescription": "SWbatch allows for the batch inversion of experimental surface-wave dispersion data considering multiple layering parameterizations and multiple trials per parameterization using the Dinver module of the open-source software Geopsy.",
 	"longDescription": "SWbatch is an application to rapidly perform multiple global-search inversions of experimental surface-wave dispersion data with measures of uncertainty using the neighborhood algorithm as implemented in the Dinver module of the popular open-source software Geopsy (www.geopsy.org). SWbatch allows the user to rapidly and conveniently invert experimental dispersion data considering multiple inversion parameterizations to address the problem’s non-uniqueness and multiple trials per parameterization to address the problem’s nonlinearity. To facilitate the potentially large amounts of pre- and post-processing required when performing batch surface-wave inversions a Python package, SWprepost, has been released open-source. More information about SWbatch and SWprepost can be found in the SWprepost documentation, link provided below.",
@@ -74,8 +74,8 @@
 				"type": "string"
 			},
 			"details": {
-				"label": "Analysis Identifier",
-				"description": "Brief analysis identifier that is memorable and descriptive. Each output file will begin with this string of characters. No spaces or special characters permitted.",
+				"label": "Analysis Name",
+				"description": "Analysis name that is brief, memorable, and descriptive. Each output file will begin with this string of characters. No spaces or special characters are permitted.",
 				"argument": null,
 				"showArgument": false,
 				"repeatArgument": false
@@ -283,7 +283,7 @@
 			},
 			"details": {
 				"label": "Minimum frequency of exported dispersion curve(s) in Hz",
-				"description": "Number (positive float) for minimum frequency of exported dispersion curve(s) in Hz. Choose a value slightly less than the minimum frequency of your experimental dispersion data.",
+				"description": "Number (positive float) for minimum frequency of exported dispersion curve(s) in Hz. Selecting a value slightly less than the minimum frequency of your experimental dispersion data is recommended.",
 				"argument": null,
 				"showArgument": false,
 				"repeatArgument": false
@@ -309,7 +309,7 @@
 			},
 			"details": {
 				"label": "Maximum frequency of exported dispersion curve(s) in Hz",
-				"description": "Number (positive float) for maximum frequency of exported dispersion curve(s) in Hz. Choose a value slightly larger than the maximum frequency of your experimental dispersion data.",
+				"description": "Number (positive float) for maximum frequency of exported dispersion curve(s) in Hz. Selecting a value slightly larger than the maximum frequency of your experimental dispersion data is recommended.",
 				"argument": null,
 				"showArgument": false,
 				"repeatArgument": false

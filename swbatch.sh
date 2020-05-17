@@ -1,4 +1,4 @@
-# SWbatch v0.2.0
+# SWbatch v0.2.1
 # Written by: Joseph Vantassel (jvantassel@utexas.edu)
 # Written on: 5 March 2019
 # This code performs batch inversions that consider multiple paramaterizations

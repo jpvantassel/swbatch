@@ -58,7 +58,7 @@ for ctar in $tlist ; do
       for trial in $(seq 0 $((${ntrial}-1))); do
         parname=${cpar##*/}
         parroot=${parname%%.*}
-        rep=${name}_${tarroot}_${parroot}_TR${trial}
+        rep=${name}_${tarroot}_${parroot}_Tr${trial}
 	      echo "${rep} Start">>3_text/transfer.log
         dinver -i DispersionCurve -optimization -itmax ${It} -ns0 ${Ns0} -ns ${Ns} -nr ${Nr} -target ${ctar} -param ${cpar} -o 2_reports/${rep}.report 2>> 2_reports/${rep}.log
         gpdcreport -best ${nprofile} 2_reports/${rep}.report | gpdc -R 1 -n ${fnum} -min ${fmin} -max ${fmax} > 3_text/${rep}_DC.txt 2>>3_text/transfer.log

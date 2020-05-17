@@ -1,20 +1,20 @@
 {
-	"name": "GeopsyInvert",
+	"name": "swbatch",
 	"parallelism": "SERIAL",
 	"version": "0.2.0",
-	"label": "GeopsyInvert",
-	"shortDescription": "GeopsyInvert is an application to rapidly perform multiple global-search inversions as implemented in the open-source software Geopsy (www.Geopsy.org)",
-	"longDescription": "GeopsyInvert is an application to rapidly perform multiple global-search inversions of experimental dispersion data with measures of uncertainty using the neighborhood algorithm as implemented in the open-source software Geopsy (www.Geopsy.org). UTinvert allows the user to rapidly and conveniently consider multiple inversion parameterizations to address the problem’s non-uniqueness, multiple starting seed values to address the problem’s nonlinearity, and in the future (developments on-going) a method to address how to best propagate the experimental dispersion data’s uncertainty into the resulting shear wave velocity profiles.",
-	"helpURI": "http://www.Geopsy.org",
-	"appCategory": "Partner Data Apps",
+	"label": "SWbatch",
+	"shortDescription": "SWbatch allows for the batch inversion of experimental surface-wave dispersion data considering multiple layering parameterizations and multiple trials per parameterization using the Dinver module of the open-source software Geopsy.",
+	"longDescription": "SWbatch is an application to rapidly perform multiple global-search inversions of experimental surface-wave dispersion data with measures of uncertainty using the neighborhood algorithm as implemented in the Dinver module of the popular open-source software Geopsy (www.geopsy.org). SWbatch allows the user to rapidly and conveniently invert experimental dispersion data considering multiple inversion parameterizations to address the problem’s non-uniqueness and multiple trials per parameterization to address the problem’s nonlinearity. To facilitate the potentially large amounts of pre- and post-processing required when performing batch surface-wave inversions a Python package, SWprepost, has been released open-source. More information about SWbatch and SWprepost can be found in the SWprepost documentation, link provided below.",
+	"helpURI": "https://github.com/jpvantassel/swprepost",
+	"appCategory": "Simulation",
 	"defaultMemory": 92,
 	"defaultMemoryPerNode": 92,
 	"defaultNodeCount": 1,
-	"defaultProcessors": 16,
-	"defaultProcessorsPerNode": 16,
+	"defaultProcessors": 68,
+	"defaultProcessorsPerNode": 68,
 	"defaultQueue": "normal",
 	"defaultMaxRunTime": "48:00:00",
-	"deploymentPath": "hgurram/geopsyinvert",
+	"deploymentPath": "hgurram/swbatch",
 	"deploymentSystem": "designsafe.storage.default",
 	"executionSystem": "designsafe.community.exec.stampede2.nores",
 	"executionType": "HPC",
@@ -27,39 +27,43 @@
 		"hazards",
 		"NHERI",
 		"desktop",
-		"geospy"
+		"geospy",
+		"inversion"
 	],
 	"ontology": [],
-	"inputs": [{
-		"id": "workingDirectory",
-		"value": {
-			"validator": "",
-			"visible": true,
-			"required": true,
-			"order": 0,
-			"enquote": false,
-			"default": "agave://designsafe.storage.default/"
-		},
-		"details": {
-			"label": "Working Directory",
-			"description": "The directory containing the files that you want to work on. This directory and its files will be copied to where your Dispersion session runs. You can drag the link for the directory from the Data Browser on the left, or click the 'Select Input' button and then select the directory.",
-			"argument": null,
-			"showArgument": false,
-			"repeatArgument": false
-		},
-		"semantics": {
-			"ontology": [
-				"xsd:string"
-			],
-			"minCardinality": 1,
-			"maxCardinality": 1,
-			"fileTypes": [
-				"raw-0"
-			]
+	"inputs": [
+		{
+			"id": "workingDirectory",
+			"value": {
+				"validator": "",
+				"visible": true,
+				"required": true,
+				"order": 0,
+				"enquote": false,
+				"default": "agave://designsafe.storage.default/"
+			},
+			"details": {
+				"label": "Working Directory",
+				"description": "The directory containing the target (i.e., 0_target) and parameter (i.e., 1_parameter) directories, see documentation for details. If using the portal interface (i.e., not using Jupyter) you can drag the link for the directory from the Data Browser on the left, or click the 'Select Input' button and then select the directory.",
+				"argument": null,
+				"showArgument": false,
+				"repeatArgument": false
+			},
+			"semantics": {
+				"ontology": [
+					"xsd:string"
+				],
+				"minCardinality": 1,
+				"maxCardinality": 1,
+				"fileTypes": [
+					"raw-0"
+				]
+			}
 		}
-	}],
-	"parameters": [{
-			"id": "Sd",
+	],
+	"parameters": [
+		{
+			"id": "name",
 			"value": {
 				"validator": "",
 				"visible": true,
@@ -70,8 +74,34 @@
 				"type": "string"
 			},
 			"details": {
-				"label": "Number of seeds",
-				"description": "Number (positive integer) of starting seeds to attempt.",
+				"label": "Analysis Identifier",
+				"description": "Brief analysis identifier that is memorable and descriptive. Each output file will begin with this string of characters. No spaces or special characters permitted.",
+				"argument": null,
+				"showArgument": false,
+				"repeatArgument": false
+			},
+			"semantics": {
+				"ontology": [
+					"xs:string"
+				],
+				"minCardinality": 1,
+				"maxCardinality": 1
+			}
+		},
+		{
+			"id": "ntrial",
+			"value": {
+				"validator": "",
+				"visible": true,
+				"required": true,
+				"order": 0,
+				"enquote": false,
+				"default": "",
+				"type": "int"
+			},
+			"details": {
+				"label": "Number of inversion trials",
+				"description": "Number (positive integer) of inversion trials to perform per parameterization. 3 is recommended.",
 				"argument": null,
 				"showArgument": false,
 				"repeatArgument": false
@@ -97,7 +127,7 @@
 			},
 			"details": {
 				"label": "Number of iterations",
-				"description": "Number (positive integer) of iterations to perform.",
+				"description": "Number (positive integer) of neighborhood-algorithm iterations to perform per inversion. 250 is recommended.",
 				"argument": null,
 				"showArgument": false,
 				"repeatArgument": false
@@ -111,7 +141,7 @@
 			}
 		},
 		{
-			"id": "N0",
+			"id": "Ns0",
 			"value": {
 				"validator": "",
 				"visible": true,
@@ -123,7 +153,7 @@
 			},
 			"details": {
 				"label": "Number of initial random samples",
-				"description": "Number (positive integer) of randomly sampled profiles to attempt before first iteration.",
+				"description": "Number (positive integer) of randomly sampled profiles to attempt before the first neighborhood-algorithm iteration. 10000 is recommended.",
 				"argument": null,
 				"showArgument": false,
 				"repeatArgument": false
@@ -149,7 +179,7 @@
 			},
 			"details": {
 				"label": "Number of profiles to consider when resampling",
-				"description": "Number (positive integer) of best profiles to consider when resampling.",
+				"description": "Number (positive integer) of best profiles to consider when resampling. 100 is recommended.",
 				"argument": null,
 				"showArgument": false,
 				"repeatArgument": false
@@ -175,7 +205,7 @@
 			},
 			"details": {
 				"label": "Number of profiles per iteration",
-				"description": "Number (positive integer) of new profiles to consider per iteration.",
+				"description": "Number (positive integer) of new profiles to consider per neighborhood-algorithm iteration. 200 is recommended.",
 				"argument": null,
 				"showArgument": false,
 				"repeatArgument": false
@@ -189,7 +219,7 @@
 			}
 		},
 		{
-			"id": "Np",
+			"id": "nprofile",
 			"value": {
 				"validator": "",
 				"visible": true,
@@ -201,7 +231,7 @@
 			},
 			"details": {
 				"label": "Number of profiles/dispersion curves to export",
-				"description": "Number (positive integer) of profiles/dispersion curves to export for each seed.",
+				"description": "Number (positive integer) of profiles/dispersion curves to export. 100 is recommended.",
 				"argument": null,
 				"showArgument": false,
 				"repeatArgument": false
@@ -215,7 +245,7 @@
 			}
 		},
 		{
-			"id": "Fnum",
+			"id": "fnum",
 			"value": {
 				"validator": "",
 				"visible": true,
@@ -227,7 +257,7 @@
 			},
 			"details": {
 				"label": "Number of frequency points in exported dispersion curve(s).",
-				"description": "Number (positive integer) of frequency point in the exported dispersion curve(s).",
+				"description": "Number (positive integer) of frequency points in the exported dispersion curve(s). 30 is recommended.",
 				"argument": null,
 				"showArgument": false,
 				"repeatArgument": false
@@ -241,7 +271,7 @@
 			}
 		},
 		{
-			"id": "Fmin",
+			"id": "fmin",
 			"value": {
 				"validator": "",
 				"visible": true,
@@ -253,7 +283,7 @@
 			},
 			"details": {
 				"label": "Minimum frequency of exported dispersion curve(s) in Hz",
-				"description": "Number (positive float) for minimum frequency of exported dispersion curve(s) in Hz.",
+				"description": "Number (positive float) for minimum frequency of exported dispersion curve(s) in Hz. Choose a value slightly less than the minimum frequency of your experimental dispersion data.",
 				"argument": null,
 				"showArgument": false,
 				"repeatArgument": false
@@ -267,7 +297,7 @@
 			}
 		},
 		{
-			"id": "Fmax",
+			"id": "fmax",
 			"value": {
 				"validator": "",
 				"visible": true,
@@ -279,7 +309,7 @@
 			},
 			"details": {
 				"label": "Maximum frequency of exported dispersion curve(s) in Hz",
-				"description": "Number (positive float) for maximum frequency of exported dispersion curve(s) in Hz.",
+				"description": "Number (positive float) for maximum frequency of exported dispersion curve(s) in Hz. Choose a value slightly larger than the maximum frequency of your experimental dispersion data.",
 				"argument": null,
 				"showArgument": false,
 				"repeatArgument": false

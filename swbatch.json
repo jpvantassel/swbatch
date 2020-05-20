@@ -12,14 +12,15 @@
   "helpURI": "https://github.com/jpvantassel/swprepost",
   "label": "SWbatch",
   "owner": "hgurram",
-  "shortDescription": "SWbatch allows for the batch inversion of experimental surface-wave dispersion data.",
-  "longDescription": "GeopsyInvert is an application to rapidly perform multiple global-search inversions of experimental dispersion data with measures of uncertainty using the neighborhood algorithm as implemented in the open-source software Geopsy (www.Geopsy.org). UTinvert allows the user to rapidly and conveniently consider multiple inversion parameterizations to address the problem’s non-uniqueness, multiple starting seed values to address the problem’s nonlinearity, and in the future (developments on-going) a method to address how to best propagate the experimental dispersion data’s uncertainty into the resulting shear wave velocity profiles.",
+  "shortDescription": "SWbatch allows for the batch inversion of surface wave dispersion data using the Dinver module of Geopsy.",
+  "longDescription": "SWbatch is an application to rapidly perform multiple global-search inversions of experimental surface-wave dispersion data with measures of uncertainty using the Neighborhood Algorithm as implemented in the Dinver module of the popular open-source software Geopsy (www.geopsy.org). SWbatch allows the user to rapidly and conveniently invert experimental dispersion data considering multiple inversion parameterizations to address the problem’s non-uniqueness and multiple trials per parameterization to address the problem’s nonlinearity. To facilitate the potentially large amounts of pre- and post-processing required when performing batch surface-wave inversions a Python package, SWprepost, has been released open-source. More information about SWbatch and SWprepost can be found in the SWprepost documentation, link provided below.",
   "tags": [
     "DesignSafe",
     "hazards",
     "NHERI",
     "desktop",
-    "geospy",
+	"geopsy",
+	"inversion",
     "hideProcessorsPerNode",
     "hideNodeCount",
     "appCategory:Simulation",
@@ -47,7 +48,7 @@
       },
       "details": {
         "label": "Working Directory",
-        "description": "The directory containing the files that you want to work on. This directory and its files will be copied to where your Dispersion session runs. You can drag the link for the directory from the Data Browser on the left, or click the 'Select Input' button and then select the directory.",
+        "description": "The directory containing the target (i.e., 0_target) and parameter (i.e., 1_parameter) directories, see documentation for details. If using the portal interface (i.e., not using Jupyter) you can drag the link for the directory from the Data Browser on the left, or click the 'Select Input' button and then select the directory.",
         "argument": null,
         "showArgument": false,
         "repeatArgument": false
@@ -104,7 +105,7 @@
       },
       "details": {
         "label": "Number of inversion trials",
-        "description": "Number (positive integer) of inversion trials to perform per parameterization (3 is recommended).",
+        "description": "Number (positive integer) of inversion trials to perform per parameterization. (3 is recommended)",
         "argument": null,
         "showArgument": false,
         "repeatArgument": false
@@ -130,7 +131,7 @@
       },
       "details": {
         "label": "Number of iterations",
-        "description": "Number (positive integer) of neighborhood-algorithm iterations to perform per inversion (250 is recommended).",
+        "description": "Number (positive integer) of Neighborhood-Algorithm iterations to perform per inversion. (250 is recommended)",
         "argument": null,
         "showArgument": false,
         "repeatArgument": false
@@ -156,7 +157,7 @@
       },
       "details": {
         "label": "Number of initial random samples",
-        "description": "Number (positive integer) of randomly sampled profiles to attempt before the first neighborhood-algorithm iteration (10000 is recommended).",
+        "description": "Number (positive integer) of randomly sampled profiles to attempt before the first Neighborhood-Algorithm iteration. (10000 is recommended)",
         "argument": null,
         "showArgument": false,
         "repeatArgument": false
@@ -182,7 +183,7 @@
       },
       "details": {
         "label": "Number of profiles to consider when resampling",
-        "description": "Number (positive integer) of best profiles to consider when resampling (100 is recommended).",
+        "description": "Number (positive integer) of best profiles to consider when resampling. (100 is recommended)",
         "argument": null,
         "showArgument": false,
         "repeatArgument": false
@@ -208,7 +209,7 @@
       },
       "details": {
         "label": "Number of profiles per iteration",
-        "description": "Number (positive integer) of new profiles to consider per neighborhood-algorithm iteration (200 is recommended).",
+        "description": "Number (positive integer) of new profiles to consider per Neighborhood-Algorithm iteration. (200 is recommended)",
         "argument": null,
         "showArgument": false,
         "repeatArgument": false
@@ -234,7 +235,7 @@
       },
       "details": {
         "label": "Number of profiles/dispersion curves to export",
-        "description": "Number (positive integer) of profiles/dispersion curves to export (100 is recommended).",
+        "description": "Number (positive integer) of profiles/dispersion curves to export. (100 is recommended)",
         "argument": null,
         "showArgument": false,
         "repeatArgument": false
@@ -260,7 +261,7 @@
       },
       "details": {
         "label": "Number of frequency points in exported dispersion curve(s).",
-        "description": "Number (positive integer) of frequency points in the exported dispersion curve(s) (30 is recommended).",
+        "description": "Number (positive integer) of frequency points in the exported dispersion curve(s). (30 is recommended)",
         "argument": null,
         "showArgument": false,
         "repeatArgument": false

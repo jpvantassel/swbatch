@@ -2,6 +2,8 @@
 
 > Joseph P. Vantassel, The University of Texas at Austin
 
+[![DOI](https://zenodo.org/badge/240935736.svg)](https://zenodo.org/badge/latestdoi/240935736)
+
 ## Summary
 
 `SWbatch` is a user-friendly, web-based application hosted on the
@@ -17,7 +19,13 @@ open-source. More information about `SWprepost` can be found on its
 
 If you use `SWbatch` in your research we ask that you please cite the following:
 
->Joseph Vantassel, Harika Gurram, and Brady Cox. (2020). jpvantassel/swprepost: latest (Concept). Zenodo. doi: forthcoming
+>Joseph Vantassel, Harika Gurram, and Brady Cox. (2020). jpvantassel/swbatch:
+latest (Concept). Zenodo. https://doi.org/10.5281/zenodo.3840546
+
+_Note: For software, version specific citations should be preferred to general
+concept citations, such as that listed above. To generate a version specific
+citation for `SWbatch`, please use the citation tool for that specific version
+on the `SWbatch` [archive](https://zenodo.org/badge/latestdoi/240935736)._
 
 ## Getting Started
 

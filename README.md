@@ -1,4 +1,4 @@
-# SWbatch - A DesignSafe-CI application for batch-style surface wave inversions
+# SWbatch - A DesignSafe-CI application for batch-style surface wave inversions using the Dinver module of the open-source software Geopsy
 
 > Joseph P. Vantassel, The University of Texas at Austin
 
@@ -8,7 +8,9 @@
 
 `SWbatch` is a user-friendly, web-based application hosted on the
 DesignSafe-CyberInfrastructure for performing batch-style surface wave
-inversions. `SWbatch` allows the user to rapidly and conveniently invert
+inversions using the Dinver module of the open-source software
+[Geopsy](http://geopsy.org/). `SWbatch` allows the user to rapidly and
+conveniently invert
 experimental dispersion data considering multiple inversion parameterizations
 to address the problem’s non-uniqueness and multiple trials per parameterization
 to address the problem’s nonlinearity. To facilitate the potentially large

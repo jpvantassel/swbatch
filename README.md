@@ -24,7 +24,7 @@ If you use `SWbatch` in your research we ask that you please cite the following:
 There are two ways of using `SWbatch`:
 
 1. As part of a developed Jupyter workflow called SWinvert. (Recommended)
-2. Or directly through the DesignSafe-CI `Research Workbench`. (Not Recommended for reasons provided below).
+2. Or directly through the DesignSafe-CI Research Workbench. (Not Recommended for reasons provided below).
 
 ### Instructions for using the Jupyter Workflow
 
@@ -43,7 +43,7 @@ sure to first remove the previous inputs and results.
 __(20 hour, excludes inversion runtime)__
 4. Enjoy!
 
-### Instructions for using the DesignSafe-CI `Research Workbench`
+### Instructions for using the DesignSafe-CI Research Workbench
 
 _Note: This approach is not recommended as it is more involved than the previous
 approach, however for those so inclined instructions are provided below._

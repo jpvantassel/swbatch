@@ -1,4 +1,6 @@
-# SWbatch v0.2.1
+# This file belongs to SWbatch A DesignSafe-CI application
+# for performing batch-style surface-wave inverison.
+# Copyright (C) 2019 - 2020 Joseph P. Vantassel (jvantassel@utexas.edu)
 
 # Inputs
 workingDirectory="."

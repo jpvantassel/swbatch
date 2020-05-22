@@ -1,4 +1,4 @@
-# SWbatch - A DesignSafe-CI application for batch-style surface-wave inversions
+# SWbatch - A DesignSafe-CI application for batch-style surface wave inversions
 
 > Joseph P. Vantassel, The University of Texas at Austin
 
@@ -24,34 +24,35 @@ If you use `SWbatch` in your research we ask that you please cite the following:
 There are two ways of using `SWbatch`:
 
 1. As part of a developed Jupyter workflow called SWinvert. (Recommended)
-2. Or directly through the DesignSafe-CI `Research Workbench`. (Not Recommended for reasons provided below).
+2. Or directly through the DesignSafe-CI Research Workbench. (Not Recommended for reasons provided below).
 
 ### Instructions for using the Jupyter Workflow
 
 1. Visit the `SWprepost` [GitHub](https://github.com/jpvantassel/swprepost) and
-follow the `Getting Started` instructions provided there. The advanced example
+follow the `Getting Started` instructions. The advanced example
 walks you through using the `SWinvert` surface wave inversion workflow.
  __(30 minutes)__
 2. Login to [DesignSafe](https://www.designsafe-ci.org/). Transfer the advanced
 example and follow the instructions provided therein to repeat the
-tutorial this time using the computational power of `SWbatch` to perform
-the inversion rather than using the results provided. Being sure to first remove
-the previous inputs and results.
+tutorial. This time using the computational power of `SWbatch` to perform
+the inversion rather than using the results provided. Be sure to remove
+the previous inputs and results before running your inversion with `SWbatch`.
 __(20 minutes, excludes inversion runtime)__
-3. Upload your own experimental dispersion data and repeat the workflow. Being
-sure to first remove the previous inputs and results.
-__(20 hour, excludes inversion runtime)__
+3. Upload your own experimental dispersion data and repeat the workflow. Be sure
+to remove the previous inputs and results before running your inversion with
+`SWbatch`.
+__(20 minutes, excludes inversion runtime)__
 4. Enjoy!
 
-### Instructions for using the DesignSafe-CI `Research Workbench`
+### Instructions for using the DesignSafe-CI Research Workbench
 
 _Note: This approach is not recommended as it is more involved than the previous
 approach, however for those so inclined instructions are provided below._
 
 1. Visit the `SWprepost` [GitHub](https://github.com/jpvantassel/swprepost) and
-follow the `Getting Started` instructions provided there, for running the
-advanced example locally. This will introduce you to `SWprepost` and the
-`SWinvert` workflow, which is required for step 2. __(30 minutes)__
+follow the `Getting Started` instructions. This will introduce you to
+`SWprepost` and the `SWinvert` workflow, which is required for step 2.
+__(30 minutes)__
 2. Login to [DesignSafe](https://www.designsafe-ci.org/). Create a directory for
 your inversion, inside of which mimic the directory structure of the advanced
 example from step 1. Place your `.target` and `.param` files in the appropriate
@@ -59,7 +60,7 @@ directories. __(45 minutes)__
 3. Launch `SWbatch`, by going to
 `Research Workbench>Workspace>Simulation>SWbatch` on DesignSafe and following
 the instructions provided there. __(30 minutes, excludes inversion runtime)__
-4. To see the status of your simulation refer to the `Job Status` bar on the
-DesignSafe Workspace. When it is complete use the `View` button provided to
-view your inversion results. __(5 minutes)__
+4. To see the status of your simulation refer to the `Job Status` bar. When your
+job is complete use the `View` button to view your inversion results.
+__(5 minutes)__
 5. Enjoy!

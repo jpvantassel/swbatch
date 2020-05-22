@@ -1,15 +1,6 @@
-# SWbatch v0.2.1
-# Written by: Joseph Vantassel (jvantassel@utexas.edu)
-# Written on: 5 March 2019
-# This code performs batch inversions that consider multiple paramaterizations
-
-# Change log
-# Last edit: 24 June 2019
-# Update to loop over 2 targets, allow for more than 9 seeds, move extraction inside the loop.
-# Last edit: 14 February 2020
-# Bug fix with Np.
-# Last edit: 17 May 2020
-# Major refactoring.
+# This file belongs to SWbatch A DesignSafe-CI application
+# for performing batch-style surface-wave inverison.
+# Copyright (C) 2019 - 2020 Joseph P. Vantassel (jvantassel@utexas.edu)
 
 # Setup
 set -x

@@ -7,9 +7,9 @@
   "defaultNodeCount": 1,
   "defaultMaxRunTime": "48:00:00",
   "defaultQueue": "normal",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "isPublic": false,
-  "helpURI": "https://github.com/jpvantassel/swprepost",
+  "helpURI": "https://github.com/jpvantassel/swbatch",
   "label": "SWbatch",
   "owner": "hgurram",
   "shortDescription": "SWbatch allows for the batch inversion of surface wave dispersion data using the Dinver module of Geopsy.",
@@ -19,8 +19,8 @@
     "hazards",
     "NHERI",
     "desktop",
-	"geopsy",
-	"inversion",
+	  "geopsy",
+	  "inversion",
     "hideProcessorsPerNode",
     "hideNodeCount",
     "appCategory:Simulation",
@@ -29,7 +29,7 @@
   "ontology": [],
   "executionType": "HPC",
   "executionSystem": "designsafe.community.exec.stampede2.nores",
-  "deploymentPath": "hgurram/geopsyinvent/swbatch",
+  "deploymentPath": "hgurram/swbatch",
   "deploymentSystem": "designsafe.storage.default",
   "templatePath": "wrapper.sh",
   "testPath": "test/test.sh",
@@ -37,7 +37,7 @@
   "modules": [],
   "inputs": [
     {
-      "id": "workingDirectory",
+      "id": "workingdirectory",
       "value": {
         "validator": "",
         "visible": true,
@@ -97,7 +97,7 @@
       "value": {
         "visible": true,
         "required": true,
-        "type": "string",
+        "type": "integer",
         "order": 0,
         "enquote": false,
         "default": "",
@@ -119,14 +119,14 @@
       }
     },
     {
-      "id": "It",
+      "id": "it",
       "value": {
         "visible": true,
         "required": true,
-        "type": "string",
+        "type": "integer",
         "order": 0,
         "enquote": false,
-        "default": "",
+        "default": "250",
         "validator": ""
       },
       "details": {
@@ -145,14 +145,14 @@
       }
     },
     {
-      "id": "Ns0",
+      "id": "ns0",
       "value": {
         "visible": true,
         "required": true,
-        "type": "string",
+        "type": "integer",
         "order": 0,
         "enquote": false,
-        "default": "",
+        "default": "10000",
         "validator": ""
       },
       "details": {
@@ -171,11 +171,11 @@
       }
     },
     {
-      "id": "Nr",
+      "id": "nr",
       "value": {
         "visible": true,
         "required": true,
-        "type": "string",
+        "type": "integer",
         "order": 0,
         "enquote": false,
         "default": "",
@@ -197,11 +197,11 @@
       }
     },
     {
-      "id": "Ns",
+      "id": "ns",
       "value": {
         "visible": true,
         "required": true,
-        "type": "string",
+        "type": "integer",
         "order": 0,
         "enquote": false,
         "default": "",
@@ -223,11 +223,11 @@
       }
     },
     {
-      "id": "nprofile",
+      "id": "ngroundmodel",
       "value": {
         "visible": true,
         "required": true,
-        "type": "string",
+        "type": "integer",
         "order": 0,
         "enquote": false,
         "default": "",
@@ -249,11 +249,63 @@
       }
     },
     {
-      "id": "fnum",
+      "id": "nrayleigh",
       "value": {
         "visible": true,
         "required": true,
-        "type": "string",
+        "type": "integer",
+        "order": 0,
+        "enquote": false,
+        "default": "",
+        "validator": ""
+      },
+      "details": {
+        "label": "Number of profiles/dispersion curves to export",
+        "description": "Number (positive integer) of profiles/dispersion curves to export. (100 is recommended)",
+        "argument": null,
+        "showArgument": false,
+        "repeatArgument": false
+      },
+      "semantics": {
+        "minCardinality": 1,
+        "maxCardinality": 1,
+        "ontology": [
+          "xs:string"
+        ]
+      }
+    },
+    {
+      "id": "nlove",
+      "value": {
+        "visible": true,
+        "required": true,
+        "type": "integer",
+        "order": 0,
+        "enquote": false,
+        "default": "",
+        "validator": ""
+      },
+      "details": {
+        "label": "Number of profiles/dispersion curves to export",
+        "description": "Number (positive integer) of profiles/dispersion curves to export. (100 is recommended)",
+        "argument": null,
+        "showArgument": false,
+        "repeatArgument": false
+      },
+      "semantics": {
+        "minCardinality": 1,
+        "maxCardinality": 1,
+        "ontology": [
+          "xs:string"
+        ]
+      }
+    },
+    {
+      "id": "dcfnum",
+      "value": {
+        "visible": true,
+        "required": true,
+        "type": "integer",
         "order": 0,
         "enquote": false,
         "default": "",
@@ -275,11 +327,11 @@
       }
     },
     {
-      "id": "fmin",
+      "id": "dcfmin",
       "value": {
         "visible": true,
         "required": true,
-        "type": "string",
+        "type": "float",
         "order": 0,
         "enquote": false,
         "default": "",
@@ -301,11 +353,11 @@
       }
     },
     {
-      "id": "fmax",
+      "id": "dcfmax",
       "value": {
         "visible": true,
         "required": true,
-        "type": "string",
+        "type": "float",
         "order": 0,
         "enquote": false,
         "default": "",
@@ -325,7 +377,112 @@
           "xs:string"
         ]
       }
+    },
+    {
+    "id": "nellipticity",
+    "value": {
+      "visible": true,
+      "required": true,
+      "type": "integer",
+      "order": 0,
+      "enquote": false,
+      "default": "",
+      "validator": ""
+    },
+    "details": {
+      "label": "Number of profiles/dispersion curves to export",
+      "description": "Number (positive integer) of profiles/dispersion curves to export. (100 is recommended)",
+      "argument": null,
+      "showArgument": false,
+      "repeatArgument": false
+    },
+    "semantics": {
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "ontology": [
+        "xs:string"
+      ]
     }
+  },
+  {
+    "id": "ellfnum",
+    "value": {
+      "visible": true,
+      "required": true,
+      "type": "integer",
+      "order": 0,
+      "enquote": false,
+      "default": "",
+      "validator": ""
+    },
+    "details": {
+      "label": "Number of frequency points in exported dispersion curve(s).",
+      "description": "Number (positive integer) of frequency points in the exported dispersion curve(s). (30 is recommended)",
+      "argument": null,
+      "showArgument": false,
+      "repeatArgument": false
+    },
+    "semantics": {
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "ontology": [
+        "xs:string"
+      ]
+    }
+  },
+  {
+    "id": "ellfmin",
+    "value": {
+      "visible": true,
+      "required": true,
+      "type": "float",
+      "order": 0,
+      "enquote": false,
+      "default": "",
+      "validator": ""
+    },
+    "details": {
+      "label": "Minimum frequency of exported dispersion curve(s) in Hz",
+      "description": "Number (positive float) for minimum frequency of exported dispersion curve(s) in Hz. Selecting a value slightly less than the minimum frequency of your experimental dispersion data is recommended.",
+      "argument": null,
+      "showArgument": false,
+      "repeatArgument": false
+    },
+    "semantics": {
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "ontology": [
+        "xs:string"
+      ]
+    }
+  },
+  {
+    "id": "ellfmax",
+    "value": {
+      "visible": true,
+      "required": true,
+      "type": "float",
+      "order": 0,
+      "enquote": false,
+      "default": "",
+      "validator": ""
+    },
+    "details": {
+      "label": "Maximum frequency of exported dispersion curve(s) in Hz",
+      "description": "Number (positive float) for maximum frequency of exported dispersion curve(s) in Hz. Selecting a value slightly larger than the maximum frequency of your experimental dispersion data is recommended.",
+      "argument": null,
+      "showArgument": false,
+      "repeatArgument": false
+    },
+    "semantics": {
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "ontology": [
+        "xs:string"
+      ]
+    }
+  }
+
   ],
   "outputs": [],
   "appCategory": "Simulation",

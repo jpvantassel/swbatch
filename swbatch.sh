@@ -2,6 +2,9 @@
 # for performing batch-style surface-wave inversions.
 # Copyright (C) 2019 - 2021 Joseph P. Vantassel (jvantassel@utexas.edu)
 
+# Useful defaults
+workingdirectory=.
+
 # Setup
 set -x
 WRAPPERDIR=$( cd "$( dirname "$0" )" && pwd )
@@ -14,6 +17,7 @@ it=10
 ns0=1000
 nr=100
 ns=10
+nmodels=10
 nrayleigh=1
 nlove=1
 dcfnum=20
@@ -28,17 +32,17 @@ ellfnum=30
 module load python3
 
 # Install requirements 
-pip3 --user install -r requirements.txt
+pip3 install --user -r requirements.txt
 
 # Setpath to Geopsy Install
 PATH=$PATH:/work/01698/rauta/geopsy/install/bin/
 
 # Launch swbatch
 python3 swbatch.py --name ${name} --ntrial ${ntrial} --it ${it}\
---ns0 ${ns0} --nr ${nr} --ns ${ns} --nrayleigh ${nrayleigh}\
---nlove ${nlove} --dcfmin ${dcfmin} --dcfmax ${dcfmax} --dcfnum ${dcfnum}\
---nellipticity ${nellipticity} --ellfmin ${ellfmin} --ellfmax ${ellfmax}\
---ellfnum ${ellfnum}
+ --ns0 ${ns0} --nr ${nr} --ns ${ns} --nmodels ${nmodels} --nrayleigh ${nrayleigh}\
+ --nlove ${nlove} --dcfmin ${dcfmin} --dcfmax ${dcfmax} --dcfnum ${dcfnum}\
+ --nellipticity ${nellipticity} --ellfmin ${ellfmin} --ellfmax ${ellfmax}\
+ --ellfnum ${ellfnum}
 
 # Callback failure
 if [ ! $? ]; then

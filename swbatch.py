@@ -43,7 +43,7 @@ def swbatch(name, ntrial=3, it=250, ns0=10000, nr=100, ns=200, nmodels=100, nray
     logger.info(f"ns0          = {ns0}")
     logger.info(f"nr           = {nr}")
     logger.info(f"ns           = {ns}")
-    logger.info(f"nmodels      = {nmdoels}")
+    logger.info(f"nmodels      = {nmodels}")
     logger.info(f"nrayleigh    = {nrayleigh}")
     logger.info(f"nlove        = {nlove}")
     logger.info(f"dcfmin       = {dcfmin}")

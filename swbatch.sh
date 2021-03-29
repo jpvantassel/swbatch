@@ -13,6 +13,9 @@ module load python3
 # Install requirements 
 pip3 --user install -r requirements.txt
 
+# Setpath to Geopsy Install
+PATH=$PATH:/work/01698/rauta/geopsy/install/bin/
+
 # Launch swbatch
 python3 swbatch.py --name ${name} --ntrial ${ntrial} --it ${it}\
 --ns0 ${ns0} --nr ${nr} --ns ${ns} --nrayleigh ${nrayleigh}\

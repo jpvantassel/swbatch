@@ -34,27 +34,30 @@ logger = logging.getLogger('swbatch')
 @click.option("--ellfnum", required=True, type=int, default=30, help="Number of frequency points in exported Rayleigh wave ellipticity curve(s). (30 is recommended)")
 def swbatch(name, ntrial=3, it=250, ns0=10000, nr=100, ns=200, nmodels=100, nrayleigh=1, nlove=1, dcfmin=0.2, dcfmax=20, dcfnum=30, nellipticity=1, ellfmin=0.2, ellfmax=20, ellfnum=30):
     """SWbatch: a tool for performing batch-style surface wave inversions.
+    
     """
-    logger.info(f"name = {name}")
+    logger.info(f"Inputs:")
+    logger.info(f"name         = {name}")
+    logger.info(f"ntrial       = {ntrial}")
+    logger.info(f"it           = {it}")
+    logger.info(f"ns0          = {ns0}")
+    logger.info(f"nr           = {nr}")
+    logger.info(f"ns           = {ns}")
+    logger.info(f"nmodels      = {nmdoels}")
+    logger.info(f"nrayleigh    = {nrayleigh}")
+    logger.info(f"nlove        = {nlove}")
+    logger.info(f"dcfmin       = {dcfmin}")
+    logger.info(f"dcfmax       = {dcfmax}")
+    logger.info(f"dcfnum       = {dcfnum}")
+    logger.info(f"nellipticity = {nellipticity}")
+    logger.info(f"ellfmin      = {ellfmin}")
+    logger.info(f"ellfmax      = {ellfmax}")
+    logger.info(f"ellfnum      = {ellfnum}")
 
-    # echo "name              = ${name}"
-    # echo "ntrial            = ${ntrial}"
-    # echo "It                = ${It}"
-    # echo "Ns0               = ${Ns0}"
-    # echo "Nr                = ${Nr}"
-    # echo "Ns                = ${Ns}"
-    # echo "nprofile          = ${nprofile}"
-    # echo "fnum              = ${fnum}"
-    # echo "fmin              = ${fmin}"
-    # echo "fmax              = ${fmax}"
-
-    # # Setpath to Geopsy Install
-    # PATH=$PATH:/work/01698/rauta/geopsy/install/bin/
-
-    # List of .target files in 0_targets directory
+    # List of .target files in 0_targets directory.
     targets = glob.glob('0_targets/*.target')
 
-    # List of .param files in 1_parameters directory
+    # List of .param files in 1_parameters directory.
     params = glob.glob('1_parameters/*.param')
 
     # Create directories if they do not yet exist.
@@ -63,26 +66,30 @@ def swbatch(name, ntrial=3, it=250, ns0=10000, nr=100, ns=200, nmodels=100, nray
         if not os.path.isdir(_dir):
             os.mkdir(_dir)
 
-    # # Setup the meta-inversion loop
+    # Setup the meta-inversion loop.
     for target in targets:
       for param in params:
         for trial in range(ntrial):
-
         logging.info(f"Starting: target={target}, param={param}, trial={trial}")
 
-        out=f"{name}_{target[:-7]}_{param[:-6]}_tr{trial}"
+        # Create default file name.
+        out=f"{name}_{target[:-7]}_{param[:-6]}_TR{trial}"
 
+        # Perform surface wave inversion.
         # dinver -i DispersionCurve -optimization -itmax ${It} -ns0 ${Ns0} -ns ${Ns} -nr ${Nr} -target ${ctar} -param ${cpar} -o 2_reports/${rep}.report 2>> 2_reports/${rep}.log
         subprocess.run(["dinver", "-i", "DispersionCurve", "-optimization", "-itmax", it, "-ns0", ns0, "-ns", ns, "-nr", nr, "-target", target, "-param", param, "-o", f"2_reports/{out}.report"], check=True)
 
+        # Extract ground models.
         # gpdcreport -best ${nprofile} 2_reports/${rep}.report > 3_text/${rep}_GM.txt 2>>3_text/transfer.log
         with open(f"3_text/{out}_GM.txt", "w") as f:
           subprocess.run(["gpdcreport", "-best", nmodels, f"2_report/{out}.report"], stdout=f, check=True)
 
+        # Calculate dispersion.
         # gpdc -R 1 -n ${fnum} -min ${fmin} -max ${fmax} > 3_text/${rep}_DC.txt 2>>3_text/transfer.log
         with open(f"3_text/{out}_DC.txt", "w") as f:
           subprocess.run(["gpdc", "-R", nrayleigh, "-L", nlove, "-min", dcfmin, "-max", dcfmax, "-n", dcfnum, f"3_text/{out}_GM.txt"], stdout=f, check=True)
 
+        # Calculate ellipticity.
         # gpell -R 1 -n ${fnum} -min ${fmin} -max ${fmax} > 3_text/${rep}_DC.txt 2>>3_text/transfer.log
         with open(f"3_text/{out}_ELL.txt", "w") as f:
           subprocess.run(["gpell", "-R", nellipticity, "-min", ellfmin, "-max", ellfmax, "-n", ellfnum, f"3_text/{out}_GM.txt"], stdout=f, check=True)

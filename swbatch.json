@@ -223,7 +223,7 @@
       }
     },
     {
-      "id": "ngroundmodel",
+      "id": "nmodels",
       "value": {
         "visible": true,
         "required": true,
@@ -234,8 +234,8 @@
         "validator": ""
       },
       "details": {
-        "label": "Number of profiles/dispersion curves to export",
-        "description": "Number (positive integer) of profiles/dispersion curves to export. (100 is recommended)",
+        "label": "Number of ground models/dispersion curves to export",
+        "description": "Number (positive integer) of ground models/dispersion curves/ellipticity curves to export. (100 is recommended)",
         "argument": null,
         "showArgument": false,
         "repeatArgument": false
@@ -260,8 +260,8 @@
         "validator": ""
       },
       "details": {
-        "label": "Number of profiles/dispersion curves to export",
-        "description": "Number (positive integer) of profiles/dispersion curves to export. (100 is recommended)",
+        "label": "Number of Rayleigh modes to export",
+        "description": "Number (positive integer) of Rayleigh modes to export. (1 is recommended)",
         "argument": null,
         "showArgument": false,
         "repeatArgument": false
@@ -287,33 +287,7 @@
       },
       "details": {
         "label": "Number of profiles/dispersion curves to export",
-        "description": "Number (positive integer) of profiles/dispersion curves to export. (100 is recommended)",
-        "argument": null,
-        "showArgument": false,
-        "repeatArgument": false
-      },
-      "semantics": {
-        "minCardinality": 1,
-        "maxCardinality": 1,
-        "ontology": [
-          "xs:string"
-        ]
-      }
-    },
-    {
-      "id": "dcfnum",
-      "value": {
-        "visible": true,
-        "required": true,
-        "type": "integer",
-        "order": 0,
-        "enquote": false,
-        "default": "",
-        "validator": ""
-      },
-      "details": {
-        "label": "Number of frequency points in exported dispersion curve(s).",
-        "description": "Number (positive integer) of frequency points in the exported dispersion curve(s). (30 is recommended)",
+        "description": "Number (positive integer) of Love modes to export. (1 is recommended)",
         "argument": null,
         "showArgument": false,
         "repeatArgument": false
@@ -379,6 +353,32 @@
       }
     },
     {
+      "id": "dcfnum",
+      "value": {
+        "visible": true,
+        "required": true,
+        "type": "integer",
+        "order": 0,
+        "enquote": false,
+        "default": "",
+        "validator": ""
+      },
+      "details": {
+        "label": "Number of frequency points in exported dispersion curve(s).",
+        "description": "Number (positive integer) of frequency points in the exported dispersion curve(s). (30 is recommended)",
+        "argument": null,
+        "showArgument": false,
+        "repeatArgument": false
+      },
+      "semantics": {
+        "minCardinality": 1,
+        "maxCardinality": 1,
+        "ontology": [
+          "xs:string"
+        ]
+      }
+    },
+    {
     "id": "nellipticity",
     "value": {
       "visible": true,
@@ -390,34 +390,8 @@
       "validator": ""
     },
     "details": {
-      "label": "Number of profiles/dispersion curves to export",
-      "description": "Number (positive integer) of profiles/dispersion curves to export. (100 is recommended)",
-      "argument": null,
-      "showArgument": false,
-      "repeatArgument": false
-    },
-    "semantics": {
-      "minCardinality": 1,
-      "maxCardinality": 1,
-      "ontology": [
-        "xs:string"
-      ]
-    }
-  },
-  {
-    "id": "ellfnum",
-    "value": {
-      "visible": true,
-      "required": true,
-      "type": "integer",
-      "order": 0,
-      "enquote": false,
-      "default": "",
-      "validator": ""
-    },
-    "details": {
-      "label": "Number of frequency points in exported dispersion curve(s).",
-      "description": "Number (positive integer) of frequency points in the exported dispersion curve(s). (30 is recommended)",
+      "label": "Number of Rayleigh modes to include in exported ellipticity",
+      "description": "Number (positive integer) of Rayleigh modes to include in exported ellipticity. (1 is recommended)",
       "argument": null,
       "showArgument": false,
       "repeatArgument": false
@@ -442,8 +416,8 @@
       "validator": ""
     },
     "details": {
-      "label": "Minimum frequency of exported dispersion curve(s) in Hz",
-      "description": "Number (positive float) for minimum frequency of exported dispersion curve(s) in Hz. Selecting a value slightly less than the minimum frequency of your experimental dispersion data is recommended.",
+      "label": "Minimum frequency of exported Rayleigh wave ellipticity in Hz",
+      "description": "Number (positive float) for minimum frequency of exported Rayleigh wave ellipticity curve(s) in Hz. Selecting a value less than the site's resonant frequency is recommended.",
       "argument": null,
       "showArgument": false,
       "repeatArgument": false
@@ -468,8 +442,34 @@
       "validator": ""
     },
     "details": {
-      "label": "Maximum frequency of exported dispersion curve(s) in Hz",
-      "description": "Number (positive float) for maximum frequency of exported dispersion curve(s) in Hz. Selecting a value slightly larger than the maximum frequency of your experimental dispersion data is recommended.",
+      "label": "Maximum frequency of exported Rayleigh wave ellipticity curve(s) in Hz",
+      "description": "Number (positive float) for maximum frequency of exported Rayleigh wave ellipticity curve(s) in Hz. Selecting a value greater than the site's resonant frequency is recommended.",
+      "argument": null,
+      "showArgument": false,
+      "repeatArgument": false
+    },
+    "semantics": {
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "ontology": [
+        "xs:string"
+      ]
+    }
+  },
+  {
+    "id": "ellfnum",
+    "value": {
+      "visible": true,
+      "required": true,
+      "type": "integer",
+      "order": 0,
+      "enquote": false,
+      "default": "",
+      "validator": ""
+    },
+    "details": {
+      "label": "Number of frequency points in exported Rayleigh wave ellipticity curve(s).",
+      "description": "Number (positive integer) of frequency points in exported Rayleigh wave ellipticity curve(s). (30 is recommended)",
       "argument": null,
       "showArgument": false,
       "repeatArgument": false
@@ -482,7 +482,6 @@
       ]
     }
   }
-
   ],
   "outputs": [],
   "appCategory": "Simulation",

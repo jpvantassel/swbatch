@@ -6,15 +6,8 @@
 rm -r 2_reports
 rm -r 3_text
 
-# Useful defaults
+# Set values in lieu of Tapis input
 workingdirectory=.
-
-# Setup
-set -x
-WRAPPERDIR=$( cd "$( dirname "$0" )" && pwd )
-cd ${workingdirectory} 
-
-# Useful defaults
 name=test
 ntrial=2
 it=10
@@ -31,6 +24,11 @@ nellipticity=1
 ellfmin=0.2
 ellfmax=20
 ellfnum=30
+
+# Setup
+set -x
+WRAPPERDIR=$( cd "$( dirname "$0" )" && pwd )
+cd ${workingdirectory} 
 
 # Load python3
 module load python3

@@ -2,6 +2,10 @@
 # for performing batch-style surface-wave inversions.
 # Copyright (C) 2019 - 2021 Joseph P. Vantassel (jvantassel@utexas.edu)
 
+# Clean up
+rm -r 2_reports
+rm -r 3_text
+
 # Useful defaults
 workingdirectory=.
 

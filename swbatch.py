@@ -83,13 +83,13 @@ def swbatch(name, ntrial=3, it=250, ns0=10000, nr=100, ns=200, nmodels=100, nray
                 # Perform surface wave inversion.
                 # dinver -i DispersionCurve -optimization -itmax ${It} -ns0 ${Ns0} -ns ${Ns} -nr ${Nr} -target ${ctar} -param ${cpar} -o 2_reports/${rep}.report 2>> 2_reports/${rep}.log
                 subprocess.run(["dinver", "-i", "DispersionCurve", "-optimization", "-itmax", it, "-ns0", ns0, "-ns",
-                                ns, "-nr", nr, "-target", target, "-param", param, "-o", f"2_reports/{out}.report"], check=True)
+                                ns, "-nr", nr, "-target", target, "-param", param, "-f", "-o", f"2_reports/{out}.report"], check=True)
 
                 # Extract ground models.
                 # gpdcreport -best ${nprofile} 2_reports/${rep}.report > 3_text/${rep}_GM.txt 2>>3_text/transfer.log
                 with open(f"3_text/{out}_GM.txt", "w") as f:
                     subprocess.run(["gpdcreport", "-best", nmodels,
-                                    f"2_report/{out}.report"], stdout=f, check=True)
+                                    f"2_reports/{out}.report"], stdout=f, check=True)
 
                 # Calculate dispersion.
                 # gpdc -R 1 -n ${fnum} -min ${fmin} -max ${fmax} > 3_text/${rep}_DC.txt 2>>3_text/transfer.log

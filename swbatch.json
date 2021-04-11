@@ -13,7 +13,7 @@
   "label": "SWbatch",
   "owner": "hgurram",
   "shortDescription": "SWbatch allows for the batch inversion of surface wave dispersion data using the Dinver module of Geopsy.",
-  "longDescription": "SWbatch is an application to rapidly perform multiple global-search inversions of experimental surface wave dispersion data with measures of uncertainty using the Neighborhood Algorithm as implemented in the Dinver module (Wathelet et al., 2004) of the open-source software Geopsy (www.geopsy.org). SWbatch allows the user to rapidly and conveniently invert experimental dispersion data considering multiple inversion parameterizations to address the problem’s non-uniqueness and multiple trials per parameterization to address the problem’s nonlinearity. To facilitate the potentially large amounts of pre- and post-processing required when performing batch surface-wave inversions a Python package, swprepost, has been released open-source. More information about SWbatch and swprepost can be found in the SWbatch documentation, link provided below.",
+  "longDescription": "SWbatch is an application to rapidly perform multiple global-search inversions of experimental surface wave dispersion data with measures of uncertainty using the Neighborhood Algorithm as implemented in the Dinver module (Wathelet et al., 2004) of the open-source software Geopsy (www.geopsy.org). SWbatch allows the user to rapidly and conveniently invert experimental dispersion data considering multiple inversion parameterizations to address the problem's non-uniqueness and multiple trials per parameterization to address the problem's nonlinearity. To facilitate the potentially large amounts of pre- and post-processing required when performing batch surface-wave inversions a Python package, swprepost, has been released open-source. More information about SWbatch and swprepost can be found in the SWbatch documentation, link provided below.",
   "tags": [
     "DesignSafe",
     "hazards",
@@ -261,7 +261,7 @@
       },
       "details": {
         "label": "Number of Rayleigh wave modes to export",
-        "description": "Number (positive integer) of Rayleigh wave modes to export. (1 is recommended)",
+        "description": "Number (positive integer) of Rayleigh wave modes to export. If no dispersion curves are desired set both the number of Rayleigh and Love modes to 0. (1 is recommended)",
         "argument": null,
         "showArgument": false,
         "repeatArgument": false
@@ -287,7 +287,7 @@
       },
       "details": {
         "label": "Number of Love wave modes to export",
-        "description": "Number (positive integer) of Love wave modes to export. (1 is recommended)",
+        "description": "Number (positive integer) of Love wave modes to export. If no dispersion curves are desired set both the number of Rayleigh and Love modes to 0. (1 is recommended)",
         "argument": null,
         "showArgument": false,
         "repeatArgument": false
@@ -391,7 +391,7 @@
     },
     "details": {
       "label": "Number of Rayleigh modes to include in exported ellipticity",
-      "description": "Number (positive integer) of Rayleigh modes to include in exported ellipticity. (1 is recommended)",
+      "description": "Number (positive integer) of Rayleigh modes to include in exported ellipticity. If no ellipticity curves are desired set this value to 0. (1 is recommended)",
       "argument": null,
       "showArgument": false,
       "repeatArgument": false

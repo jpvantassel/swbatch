@@ -92,16 +92,20 @@ def swbatch(name, ntrial=3, it=250, ns0=10000, nr=100, ns=200, nmodels=100, nray
                                    stdout=f, check=True)
 
                 # Calculate dispersion.
-                with open(f"3_text/{out}_DC.txt", "w") as f:
-                    subprocess.run(["gpdc", "-R", nrayleigh, "-L", nlove,
-                                    "-min", dcfmin, "-max", dcfmax, "-n", dcfnum,
-                                    f"3_text/{out}_GM.txt"], stdout=f, check=True)
+                if nrayleigh == "0" and nlove == "0":
+                    pass
+                else:                
+                    with open(f"3_text/{out}_DC.txt", "w") as f:
+                        subprocess.run(["gpdc", "-R", nrayleigh, "-L", nlove,
+                                        "-min", dcfmin, "-max", dcfmax, "-n", dcfnum,
+                                        f"3_text/{out}_GM.txt"], stdout=f, check=True)
 
                 # Calculate ellipticity.
-                with open(f"3_text/{out}_ELL.txt", "w") as f:
-                    subprocess.run(["gpell", "-R", nellipticity,
-                                    "-min", ellfmin, "-max", ellfmax, "-n", ellfnum,
-                                    f"3_text/{out}_GM.txt"], stdout=f, check=True)
+                if nellipticity != "0":
+                    with open(f"3_text/{out}_ELL.txt", "w") as f:
+                        subprocess.run(["gpell", "-R", nellipticity,
+                                        "-min", ellfmin, "-max", ellfmax, "-n", ellfnum,
+                                        f"3_text/{out}_GM.txt"], stdout=f, check=True)
 
 
 if __name__ == "__main__":

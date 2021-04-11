@@ -9,11 +9,11 @@
   "defaultQueue": "normal",
   "version": "0.3.0rc0",
   "isPublic": false,
-  "helpURI": "https://github.com/jpvantassel/swbatch",
+  "helpURI": "https://tinyurl.com/swbatch-readme",
   "label": "SWbatch",
   "owner": "hgurram",
   "shortDescription": "SWbatch allows for the batch inversion of surface wave dispersion data using the Dinver module of Geopsy.",
-  "longDescription": "SWbatch is an application to rapidly perform multiple global-search inversions of experimental surface wave dispersion data with measures of uncertainty using the Neighborhood Algorithm as implemented in the Dinver module of the popular open-source software Geopsy (www.geopsy.org). SWbatch allows the user to rapidly and conveniently invert experimental dispersion data considering multiple inversion parameterizations to address the problem’s non-uniqueness and multiple trials per parameterization to address the problem’s nonlinearity. To facilitate the potentially large amounts of pre- and post-processing required when performing batch surface-wave inversions a Python package, swprepost, has been released open-source. More information about SWbatch and swprepost can be found in the SWbatch documentation, link provided below.",
+  "longDescription": "SWbatch is an application to rapidly perform multiple global-search inversions of experimental surface wave dispersion data with measures of uncertainty using the Neighborhood Algorithm as implemented in the Dinver module (Wathelet et al., 2004) of the open-source software Geopsy (www.geopsy.org). SWbatch allows the user to rapidly and conveniently invert experimental dispersion data considering multiple inversion parameterizations to address the problem’s non-uniqueness and multiple trials per parameterization to address the problem’s nonlinearity. To facilitate the potentially large amounts of pre- and post-processing required when performing batch surface-wave inversions a Python package, swprepost, has been released open-source. More information about SWbatch and swprepost can be found in the SWbatch documentation, link provided below.",
   "tags": [
     "DesignSafe",
     "hazards",
@@ -48,7 +48,7 @@
       },
       "details": {
         "label": "Working Directory",
-        "description": "The directory containing the target (i.e., 0_targets) and parameter (i.e., 1_parameters) directories, see documentation for details. If using the portal interface (i.e., not using Jupyter) you can drag the link for the directory from the Data Browser on the left, or click the 'Select Input' button and then select the directory.",
+        "description": "The directory containing the target (i.e., 0_targets) and parameter (i.e., 1_parameters) directories, see documentation for details. If using the portal interface (i.e., not using Jupyter) you can drag the link for the directory from the Data Depot Browser on the left, or click the 'Select' button to select the desired directory.",
         "argument": null,
         "showArgument": false,
         "repeatArgument": false
@@ -364,7 +364,7 @@
         "validator": ""
       },
       "details": {
-        "label": "Number of frequency points in exported dispersion curve(s).",
+        "label": "Number of frequency points in exported dispersion curve(s)",
         "description": "Number (positive integer) of frequency points in the exported dispersion curve(s). (30 is recommended)",
         "argument": null,
         "showArgument": false,
@@ -468,7 +468,7 @@
       "validator": ""
     },
     "details": {
-      "label": "Number of frequency points in exported Rayleigh wave ellipticity curve(s).",
+      "label": "Number of frequency points in exported Rayleigh wave ellipticity curve(s)",
       "description": "Number (positive integer) of frequency points in exported Rayleigh wave ellipticity curve(s). (64 is recommended)",
       "argument": null,
       "showArgument": false,

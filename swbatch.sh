@@ -15,7 +15,7 @@ pip3 install --user -r requirements.txt
 
 # Setpath to Geopsy install
 # PATH=$PATH:/work/01698/rauta/geopsy/install/bin/
-PATH=$PATH:/work/projects/wma_apps/stampede2/swbatch/
+PATH=$PATH:/work/projects/wma_apps/stampede2/swbatch/geopsy/install/bin
 
 # Launch swbatch
 python3 swbatch.py --name ${name} --ntrial ${ntrial} --it ${it}\

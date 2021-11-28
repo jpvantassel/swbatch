@@ -77,7 +77,7 @@ def swbatch(name, ntrial=3, it=250, ns0=10000, nr=100, ns=200, nmodels=100, nray
                 # Create default file name.
                 _, target_suffix = target.split("/")
                 _, param_suffix = param.split("/")
-                out = f"{name}_{target_suffix[:-7]}_{param_suffix[:-6]}_TR{trial}"
+                out = f"{name}_{target_suffix[:-7]}_{param_suffix[:-6]}_tr{trial}"
 
                 # Perform surface wave inversion.
                 subprocess.run(["dinver", "-i", "DispersionCurve", "-optimization",
@@ -86,7 +86,7 @@ def swbatch(name, ntrial=3, it=250, ns0=10000, nr=100, ns=200, nmodels=100, nray
                                 "-o", f"2_reports/{out}.report"], check=True)
 
                 # Extract ground models.
-                with open(f"3_text/{out}_GM.txt", "w") as f:
+                with open(f"3_text/{out}_gm.txt", "w") as f:
                     subprocess.run(["gpdcreport", "-best", nmodels,
                                     f"2_reports/{out}.report"],
                                    stdout=f, check=True)
@@ -95,17 +95,17 @@ def swbatch(name, ntrial=3, it=250, ns0=10000, nr=100, ns=200, nmodels=100, nray
                 if nrayleigh == "0" and nlove == "0":
                     pass
                 else:                
-                    with open(f"3_text/{out}_DC.txt", "w") as f:
+                    with open(f"3_text/{out}_dc.txt", "w") as f:
                         subprocess.run(["gpdc", "-R", nrayleigh, "-L", nlove,
                                         "-min", dcfmin, "-max", dcfmax, "-n", dcfnum,
-                                        f"3_text/{out}_GM.txt"], stdout=f, check=True)
+                                        f"3_text/{out}_gm.txt"], stdout=f, check=True)
 
                 # Calculate ellipticity.
                 if nellipticity != "0":
-                    with open(f"3_text/{out}_ELL.txt", "w") as f:
+                    with open(f"3_text/{out}_ell.txt", "w") as f:
                         subprocess.run(["gpell", "-R", nellipticity,
                                         "-min", ellfmin, "-max", ellfmax, "-n", ellfnum,
-                                        f"3_text/{out}_GM.txt"], stdout=f, check=True)
+                                        f"3_text/{out}_gm.txt"], stdout=f, check=True)
 
 
 if __name__ == "__main__":

@@ -10,10 +10,9 @@ rm -r 3_text
 workingdirectory=.
 name=test
 ntrial=2
-it=10
 ns0=1000
 nr=100
-ns=10
+ns=1000
 nmodels=10
 nrayleigh=1
 nlove=1
@@ -37,10 +36,11 @@ module load python3
 pip3 install --user -r ../requirements.txt
 
 # Setpath to Geopsy Install
-PATH=$PATH:/work/01698/rauta/geopsy/install/bin/
+#PATH=$PATH:/work/01698/rauta/geopsy/install/bin/
+PATH=/work2/04709/vantaj94/frontera/geopsy_3-4-2/geopsy-3.4.2/bin:$PATH
 
 # Launch swbatch
-python3 ../swbatch.py --name ${name} --ntrial ${ntrial} --it ${it}\
+python3 ../swbatch.py --name ${name} --ntrial ${ntrial}\
  --ns0 ${ns0} --nr ${nr} --ns ${ns} --nmodels ${nmodels} --nrayleigh ${nrayleigh}\
  --nlove ${nlove} --dcfmin ${dcfmin} --dcfmax ${dcfmax} --dcfnum ${dcfnum}\
  --nellipticity ${nellipticity} --ellfmin ${ellfmin} --ellfmax ${ellfmax}\

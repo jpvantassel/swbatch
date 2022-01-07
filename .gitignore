@@ -1,6 +1,8 @@
+*.ipynb_checkpoints
 scratch
 __pycache__
 *.egg-info
 swbatch.log
 2_reports
 3_text
+venv

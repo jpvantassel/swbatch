@@ -6,6 +6,7 @@ import os
 import subprocess
 import glob
 import logging
+import warnings
 
 import click
 
@@ -18,11 +19,11 @@ logger = logging.getLogger('swbatch')
 @click.command()
 @click.option("--name", required=True, type=str, help="Analysis name that is brief, memorable, and descriptive. Each output file will begin with this string of characters. No spaces or special characters are permitted.")
 @click.option("--ntrial", required=True, type=str, default=3, help="Number (positive integer) of inversion trials to perform per parameterization. (3 is recommended)")
-@click.option("--it", required=True, type=str, default=250, help="Number of Neighborhood-Algorithm iterations to perform per inversion. (250 is recommended)")
+@click.option("--it", required=False, type=str, default=None, help="Deprecated in Geopsy v3.0.0 and later, see `ns` for details.")
 @click.option("--ns0", required=True, type=str, default=10000, help="Number (positive integer) of randomly sampled profiles to attempt before the first Neighborhood-Algorithm iteration. (10000 is recommended)")
 @click.option("--nr", required=True, type=str, default=100, help="Number (positive integer) of best profiles to consider when resampling. (100 is recommended)")
-@click.option("--ns", required=True, type=str, default=200, help="Number (positive integer) of new profiles to consider per Neighborhood-Algorithm iteration. (200 is recommended)")
-@click.option("--nmodels", required=True, type=str, default=100, help="Number (positive integer) of ground models/dispersion curves/ellipticity curves to export. (100 is recommended)")
+@click.option("--ns", required=True, type=str, default=200, help="Number (positive integer) of profiles to consider. In versions of Geopsy prior to v3.0.0 this was equal to `it`*`ns`. (50000 is recommended)")
+@click.option("--nmodels", required=True, type=str, default=50000, help="Number (positive integer) of ground models/dispersion curves/ellipticity curves to export. (100 is recommended)")
 @click.option("--nrayleigh", required=True, type=str, default=1, help="Number (positive integer) of Rayleigh wave modes to export. (1 is recommended)")
 @click.option("--nlove", required=True, type=str, default=1, help="Number (positive integer) of Love wave modes to export. (1 is recommended)")
 @click.option("--dcfmin", required=True, type=str, default=0.2, help="Number (positive float) for minimum frequency of exported dispersion curve(s) in Hz. Selecting a value slightly less than the minimum frequency of your experimental dispersion data is recommended.")
@@ -54,6 +55,13 @@ def swbatch(name, ntrial=3, it=250, ns0=10000, nr=100, ns=200, nmodels=100, nray
     logger.info(f"ellfmax      = {ellfmax}")
     logger.info(f"ellfnum      = {ellfnum}")
 
+    # Add warnings, after switching swbatch form Geopsy v2.10.1 to v3.4.2. 
+    if it is not "None":
+        warnings.warn("The variable `it` is deprecated in Geopsy v3.0.0 and later, see `ns` for details."
+
+    if int(ns) < 10000:
+        warnings.warn("The variable `ns` is less than 10000, searching so few models will likely result in low-quality inversion results.")
+
     # List of .target files in 0_targets directory.
     targets = glob.glob('0_targets/*.target')
     logger.info(f"targets      = {targets}")
@@ -77,11 +85,11 @@ def swbatch(name, ntrial=3, it=250, ns0=10000, nr=100, ns=200, nmodels=100, nray
                 # Create default file name.
                 _, target_suffix = target.split("/")
                 _, param_suffix = param.split("/")
-                out = f"{name}_{target_suffix[:-7]}_{param_suffix[:-6]}_tr{trial}"
+                out = f"{name}_{target_suffix[:-len(".target")]}_{param_suffix[:-len(".param")]}_tr{trial}"
 
                 # Perform surface wave inversion.
                 subprocess.run(["dinver", "-i", "DispersionCurve", "-optimization",
-                                "-itmax", it, "-ns0", ns0, "-ns", ns, "-nr", nr,
+                                "-ns0", ns0, "-ns", ns, "-nr", nr,
                                 "-target", target, "-param", param, "-f",
                                 "-o", f"2_reports/{out}.report"], check=True)
 

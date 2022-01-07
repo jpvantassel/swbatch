@@ -56,8 +56,8 @@ def swbatch(name, ntrial=3, it=250, ns0=10000, nr=100, ns=200, nmodels=100, nray
     logger.info(f"ellfnum      = {ellfnum}")
 
     # Add warnings, after switching swbatch form Geopsy v2.10.1 to v3.4.2. 
-    if it is not "None":
-        warnings.warn("The variable `it` is deprecated in Geopsy v3.0.0 and later, see `ns` for details."
+    if it is not None:
+        warnings.warn("The variable `it` is deprecated in Geopsy v3.0.0 and later, see `ns` for details.")
 
     if int(ns) < 10000:
         warnings.warn("The variable `ns` is less than 10000, searching so few models will likely result in low-quality inversion results.")
@@ -85,7 +85,7 @@ def swbatch(name, ntrial=3, it=250, ns0=10000, nr=100, ns=200, nmodels=100, nray
                 # Create default file name.
                 _, target_suffix = target.split("/")
                 _, param_suffix = param.split("/")
-                out = f"{name}_{target_suffix[:-len(".target")]}_{param_suffix[:-len(".param")]}_tr{trial}"
+                out = f"{name}_{target_suffix[:-len('.target')]}_{param_suffix[:-len('.param')]}_tr{trial}"
 
                 # Perform surface wave inversion.
                 subprocess.run(["dinver", "-i", "DispersionCurve", "-optimization",

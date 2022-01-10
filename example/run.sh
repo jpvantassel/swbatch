@@ -2,17 +2,24 @@
 # for performing batch-style surface-wave inversions.
 # Copyright (C) 2019 - 2021 Joseph P. Vantassel (jvantassel@utexas.edu)
 
+# Start
+# -----
+# print commands as executed
+set -x
+
 # Clean up
+# --------
 rm -r 2_reports
 rm -r 3_text
 
-# Set values in lieu of Tapis input
+# Set values in lieu of tapis input
+# ---------------------------------
 workingdirectory=.
-name=test
+name=ex
 ntrial=2
-ns0=1000
+ns0=100
 nr=100
-ns=1000
+ns=100
 nmodels=10
 nrayleigh=1
 nlove=1
@@ -24,22 +31,22 @@ ellfmin=0.2
 ellfmax=20
 ellfnum=30
 
-# Setup
-set -x
+# Prepare environment
+# -------------------
 WRAPPERDIR=$( cd "$( dirname "$0" )" && pwd )
 cd ${workingdirectory} 
-
-# Load python3
 module load python3
-
-# Install requirements 
 pip3 install --user -r ../requirements.txt
 
-# Setpath to Geopsy Install
+# Set path to geopsy install
+# --------------------------
+# for geopsy 2.10.1 | swbatch before and including 0.3.0
 #PATH=$PATH:/work/01698/rauta/geopsy/install/bin/
+#for geopsy 3.4.2  | swbatch including and after 0.4.0
 PATH=/work2/04709/vantaj94/frontera/geopsy_3-4-2/geopsy-3.4.2/bin:$PATH
 
 # Launch swbatch
+# --------------
 python3 ../swbatch.py --name ${name} --ntrial ${ntrial}\
  --ns0 ${ns0} --nr ${nr} --ns ${ns} --nmodels ${nmodels} --nrayleigh ${nrayleigh}\
  --nlove ${nlove} --dcfmin ${dcfmin} --dcfmax ${dcfmax} --dcfnum ${dcfnum}\
@@ -47,8 +54,11 @@ python3 ../swbatch.py --name ${name} --ntrial ${ntrial}\
  --ellfnum ${ellfnum}
 
 # Callback failure
+# ----------------
+# if not exit code zero.
+# ! is not and $? captures the last exit code.
 if [ ! $? ]; then
-        echo "SWbatch exited with an error status. $?" >&2
+        echo "swbatch exited with a non-zero exit status. The exit status is: $?" >&2
         ${AGAVE_JOB_CALLBACK_FAILURE}
         exit
 fi

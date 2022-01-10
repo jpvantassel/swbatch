@@ -1,4 +1,7 @@
-#Frequency,Velocity,Velstd
+#swprepost v1.1.0,,
+#1 potential descriptions:,,
+#rayleigh 0,,
+#Frequency (Hz),Velocity (m/s),Velocity Standard Deviation (m/s)
 3.39183293337911,508.7749400068666,25.43874700034333
 3.685155193275999,440.4124689420133,22.02062344710066
 3.997179763325596,380.60112639138833,19.030056319569415

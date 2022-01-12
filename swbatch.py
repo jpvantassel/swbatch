@@ -15,6 +15,7 @@ logging.basicConfig(filename="swbatch.log",
                     level=logging.DEBUG)
 logger = logging.getLogger('swbatch')
 
+__version__ = "0.4.0"
 
 @click.command()
 @click.option("--name", required=True, type=str, help="Analysis name that is brief, memorable, and descriptive. Each output file will begin with this string of characters. No spaces or special characters are permitted.")
@@ -36,7 +37,8 @@ logger = logging.getLogger('swbatch')
 def swbatch(name, ntrial=3, it=250, ns0=10000, nr=100, ns=200, nmodels=100, nrayleigh=1, nlove=1, dcfmin=0.2, dcfmax=20, dcfnum=30, nellipticity=1, ellfmin=0.2, ellfmax=20, ellfnum=64):
     """SWbatch: a tool for performing batch-style surface wave inversions.
 
-    """
+    ""
+    logger.info(f"swbatch version v{__version__}")"
     logger.info(f"Inputs:")
     logger.info(f"name         = {name}")
     logger.info(f"ntrial       = {ntrial}")
@@ -114,7 +116,6 @@ def swbatch(name, ntrial=3, it=250, ns0=10000, nr=100, ns=200, nmodels=100, nray
                         subprocess.run(["gpell", "-R", nellipticity,
                                         "-min", ellfmin, "-max", ellfmax, "-n", ellfnum,
                                         f"3_text/{out}_gm.txt"], stdout=f, check=True)
-
 
 if __name__ == "__main__":
     swbatch()

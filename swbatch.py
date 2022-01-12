@@ -37,8 +37,8 @@ __version__ = "0.4.0"
 def swbatch(name, ntrial=3, it=250, ns0=10000, nr=100, ns=200, nmodels=100, nrayleigh=1, nlove=1, dcfmin=0.2, dcfmax=20, dcfnum=30, nellipticity=1, ellfmin=0.2, ellfmax=20, ellfnum=64):
     """SWbatch: a tool for performing batch-style surface wave inversions.
 
-    ""
-    logger.info(f"swbatch version v{__version__}")"
+    """
+    logger.info(f"swbatch version v{__version__}")
     logger.info(f"Inputs:")
     logger.info(f"name         = {name}")
     logger.info(f"ntrial       = {ntrial}")
@@ -57,7 +57,8 @@ def swbatch(name, ntrial=3, it=250, ns0=10000, nr=100, ns=200, nmodels=100, nray
     logger.info(f"ellfmax      = {ellfmax}")
     logger.info(f"ellfnum      = {ellfnum}")
 
-    # Add warnings, after switching swbatch form Geopsy v2.10.1 to v3.4.2. 
+    # Add warnings, after switching swbatch from geopsy v2.10.1 to v3.4.2. 
+    # TODO(jpv): Deprecate in swbatch version greater than v0.4.0.
     if it is not None:
         warnings.warn("The variable `it` is deprecated in Geopsy v3.0.0 and later, see `ns` for details.")
 
@@ -72,7 +73,7 @@ def swbatch(name, ntrial=3, it=250, ns0=10000, nr=100, ns=200, nmodels=100, nray
     params = glob.glob('1_parameters/*.param')
     logger.info(f"params       = {params}")
 
-    # Create directories if they do not yet exist.
+    # Create output directories if they do not yet exist.
     dirs = ["2_reports", "3_text"]
     for _dir in dirs:
         if not os.path.isdir(_dir):

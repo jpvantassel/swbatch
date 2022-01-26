@@ -9,6 +9,12 @@ set -x
 # get current file's (i.e., the wrapper's) directory
 WRAPPERDIR=$( cd "$( dirname "$0" )" && pwd )
 cd ${workingdirectory}
+module purge
+module load gcc/9.1.0
+module load impi
+module load mkl
+module load fftw3
+module load qt5/5.14.2
 module load python3
 pip3 install --user -r requirements.txt
 
@@ -19,7 +25,7 @@ pip3 install --user -r requirements.txt
 # for geopsy v2.10.1 | swbatch v0.3.0
 #PATH=/work/projects/wma_apps/stampede2/swbatch/geopsy/install/bin:${PATH}
 # for geopsy v3.4.2  | swbatch including and after v0.4.0
-PATH=/work2/04709/vantaj94/frontera/geopsy_3-4-2/geopsy-3.4.2/bin:${PATH}
+PATH=/scratch1/04709/vantaj94/geopsy/geopsy-3.4.2/bin:${PATH}
 
 # Launch swbatch
 # --------------

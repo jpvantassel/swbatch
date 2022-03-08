@@ -7,8 +7,8 @@
   "defaultNodeCount": 1,
   "defaultMaxRunTime": "48:00:00",
   "defaultQueue": "normal",
-  "version": "0.3.0rc0",
-  "isPublic": false,
+  "version": "0.4.0",
+  "isPublic": true,
   "helpURI": "https://tinyurl.com/swbatch-readme",
   "label": "SWbatch",
   "owner": "hgurram",
@@ -18,7 +18,6 @@
     "DesignSafe",
     "hazards",
     "NHERI",
-    "desktop",
 	  "geopsy",
 	  "inversion",
     "hideProcessorsPerNode",
@@ -119,19 +118,19 @@
       }
     },
     {
-      "id": "it",
+      "id": "ns0",
       "value": {
         "visible": true,
         "required": true,
         "type": "string",
         "order": 0,
         "enquote": false,
-        "default": "250",
+        "default": "10000",
         "validator": ""
       },
       "details": {
-        "label": "Number of iterations",
-        "description": "Number (positive integer) of Neighborhood-Algorithm iterations to perform per inversion. (250 is recommended)",
+        "label": "Number of initial random models",
+        "description": "Number (positive integer) of randomly sampled models to attempt before the first Neighborhood-Algorithm iteration. (10000 is recommended)",
         "argument": null,
         "showArgument": false,
         "repeatArgument": false
@@ -145,19 +144,19 @@
       }
     },
     {
-      "id": "ns0",
+      "id": "ns",
       "value": {
         "visible": true,
         "required": true,
         "type": "string",
         "order": 0,
         "enquote": false,
-        "default": "10000",
+        "default": "50000",
         "validator": ""
       },
       "details": {
-        "label": "Number of initial random samples",
-        "description": "Number (positive integer) of randomly sampled profiles to attempt before the first Neighborhood-Algorithm iteration. (10000 is recommended)",
+        "label": "Number of Neighborhood models",
+        "description": "Number (positive integer) of Neighborhood-Algorithm-selected models to consider per inversion. (50000 is recommended)",
         "argument": null,
         "showArgument": false,
         "repeatArgument": false
@@ -182,34 +181,8 @@
         "validator": ""
       },
       "details": {
-        "label": "Number of profiles to consider when resampling",
-        "description": "Number (positive integer) of best profiles to consider when resampling. (100 is recommended)",
-        "argument": null,
-        "showArgument": false,
-        "repeatArgument": false
-      },
-      "semantics": {
-        "minCardinality": 1,
-        "maxCardinality": 1,
-        "ontology": [
-          "xs:string"
-        ]
-      }
-    },
-    {
-      "id": "ns",
-      "value": {
-        "visible": true,
-        "required": true,
-        "type": "string",
-        "order": 0,
-        "enquote": false,
-        "default": "200",
-        "validator": ""
-      },
-      "details": {
-        "label": "Number of profiles per iteration",
-        "description": "Number (positive integer) of new profiles to consider per Neighborhood-Algorithm iteration. (200 is recommended)",
+        "label": "Number of best models to consider when resampling",
+        "description": "Number (positive integer) of best models to consider when resampling. (100 is recommended)",
         "argument": null,
         "showArgument": false,
         "repeatArgument": false

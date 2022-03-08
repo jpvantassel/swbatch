@@ -30,7 +30,7 @@ PATH=/scratch1/04709/vantaj94/geopsy/geopsy-3.4.2/bin:${PATH}
 # Launch swbatch
 # --------------
 python3 swbatch.py --name ${name}\
- --ntrial ${ntrial} --ns0 ${ns0} --nr ${nr} --ns ${ns} --nmodels ${nmodels}\
+ --ntrial ${ntrial} --ns0 ${ns0} --ns ${ns} --nr ${nr} --nmodels ${nmodels}\
  --nrayleigh ${nrayleigh} --nlove ${nlove} --dcfmin ${dcfmin} --dcfmax ${dcfmax} --dcfnum ${dcfnum}\
  --nellipticity ${nellipticity} --ellfmin ${ellfmin} --ellfmax ${ellfmax} --ellfnum ${ellfnum}
 

@@ -25,7 +25,7 @@ pip3 install --user -r requirements.txt
 # for geopsy v2.10.1 | swbatch v0.3.0
 #PATH=/work/projects/wma_apps/stampede2/swbatch/geopsy/install/bin:${PATH}
 # for geopsy v3.4.2  | swbatch including and after v0.4.0
-PATH=/scratch1/04709/vantaj94/geopsy/geopsy-3.4.2/bin:${PATH}
+PATH=/work2/04709/vantaj94/frontera/geopsy/geopsy-3.4.2/bin:${PATH}
 
 # Launch swbatch
 # --------------

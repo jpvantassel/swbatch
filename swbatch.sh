@@ -15,12 +15,12 @@ module load tacc-singularity
 singularity pull docker://jpvantassel/geopsy-docker:3.4.2-qt5.14
 
 singularity run geopsy-docker_3.4.2-qt5.14.sif \
-pip3 install --user -r requirements.txt
+pip3 install --user -r ./requirements.txt
 
 # Launch swbatch
 # --------------
 singularity run geopsy-docker_3.4.2-qt5.14.sif \
-python3 swbatch.py --name ${name}\
+python3 ./swbatch.py --name ${name}\
  --ntrial ${ntrial} --ns0 ${ns0} --ns ${ns} --nr ${nr} --nmodels ${nmodels}\
  --nrayleigh ${nrayleigh} --nlove ${nlove} --dcfmin ${dcfmin} --dcfmax ${dcfmax} --dcfnum ${dcfnum}\
  --nellipticity ${nellipticity} --ellfmin ${ellfmin} --ellfmax ${ellfmax} --ellfnum ${ellfnum}

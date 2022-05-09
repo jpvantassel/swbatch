@@ -10,26 +10,16 @@ set -x
 WRAPPERDIR=$( cd "$( dirname "$0" )" && pwd )
 cd ${workingdirectory}
 module purge
-module load gcc/9.1.0
-module load impi
-module load mkl
-module load fftw3
-module load qt5/5.14.2
-module load python3
-pip3 install --user -r requirements.txt
+module load tacc-singularity
 
-# Set path to geopsy install
-# --------------------------
-# for geopsy v2.10.1 | swbatch before and including v0.2.1
-#PATH=/work/01698/rauta/geopsy/install/bin:${PATH} 
-# for geopsy v2.10.1 | swbatch v0.3.0
-#PATH=/work/projects/wma_apps/stampede2/swbatch/geopsy/install/bin:${PATH}
-# for geopsy v3.4.2  | swbatch including and after v0.4.0
-PATH=/work2/04709/vantaj94/frontera/geopsy/geopsy-3.4.2/bin:${PATH}
-LD_LIBRARY_PATH=/work2/04709/vantaj94/frontera/geopsy/geopsy-3.4.2/lib:${LD_LIBRARY_PATH}
+singularity pull docker://jpvantassel/geopsy-docker:3.4.2-qt5.14
+
+singularity run geopsy-docker_3.4.2-qt5.14.sif \
+pip3 install --user -r requirements.txt
 
 # Launch swbatch
 # --------------
+singularity run geopsy-docker_3.4.2-qt5.14.sif \
 python3 swbatch.py --name ${name}\
  --ntrial ${ntrial} --ns0 ${ns0} --ns ${ns} --nr ${nr} --nmodels ${nmodels}\
  --nrayleigh ${nrayleigh} --nlove ${nlove} --dcfmin ${dcfmin} --dcfmax ${dcfmax} --dcfnum ${dcfnum}\

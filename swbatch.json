@@ -6,14 +6,14 @@
   "defaultMemoryPerNode": 1,
   "defaultNodeCount": 1,
   "defaultMaxRunTime": "48:00:00",
-  "defaultQueue": "normal",
+  "defaultQueue": "small",
   "version": "0.4.0",
   "isPublic": true,
-  "helpURI": "https://tinyurl.com/swbatch-readme",
-  "label": "SWbatch",
+  "helpURI": "https://github.com/jpvantassel/swbatch",
+  "label": "swbatch",
   "owner": "hgurram",
-  "shortDescription": "SWbatch allows for the batch inversion of surface wave dispersion data using the Dinver module of Geopsy.",
-  "longDescription": "SWbatch is an application to rapidly perform multiple global-search inversions of experimental surface wave dispersion data with measures of uncertainty using the Neighborhood Algorithm as implemented in the Dinver module (Wathelet et al., 2004) of the open-source software Geopsy (www.geopsy.org). SWbatch allows the user to rapidly and conveniently invert experimental dispersion data considering multiple inversion parameterizations to address the problem's non-uniqueness and multiple trials per parameterization to address the problem's nonlinearity. To facilitate the potentially large amounts of pre- and post-processing required when performing batch surface-wave inversions a Python package, swprepost, has been released open-source. More information about SWbatch and swprepost can be found in the SWbatch documentation, link provided below.",
+  "shortDescription": "swbatch allows for the batch inversion of surface wave dispersion data using the Dinver module of Geopsy.",
+  "longDescription": "swbatch is an application to rapidly perform multiple global-search inversions of experimental surface wave dispersion data with measures of uncertainty using the Neighborhood Algorithm as implemented in the Dinver module (Wathelet et al., 2004) of the open-source software Geopsy (www.geopsy.org). swbatch allows the user to rapidly and conveniently invert experimental dispersion data considering multiple inversion parameterizations to address the problem's non-uniqueness and multiple trials per parameterization to address the problem's nonlinearity. To facilitate the potentially large amounts of pre- and post-processing required when performing batch surface-wave inversions a Python package, swprepost, has been released open-source. More information about swbatch and swprepost can be found in the swbatch documentation, link provided below.",
   "tags": [
     "DesignSafe",
     "hazards",
@@ -27,7 +27,7 @@
   ],
   "ontology": [],
   "executionType": "HPC",
-  "executionSystem": "designsafe.community.exec.stampede2.nores",
+  "executionSystem": "designsafe.community.exec.frontera.nores",
   "deploymentPath": "hgurram/swbatch",
   "deploymentSystem": "designsafe.storage.default",
   "templatePath": "wrapper.sh",
@@ -97,7 +97,7 @@
         "visible": true,
         "required": true,
         "type": "string",
-        "order": 0,
+        "order": 1,
         "enquote": false,
         "default": "3",
         "validator": ""
@@ -123,7 +123,7 @@
         "visible": true,
         "required": true,
         "type": "string",
-        "order": 0,
+        "order": 2,
         "enquote": false,
         "default": "10000",
         "validator": ""
@@ -149,7 +149,7 @@
         "visible": true,
         "required": true,
         "type": "string",
-        "order": 0,
+        "order": 3,
         "enquote": false,
         "default": "50000",
         "validator": ""
@@ -175,7 +175,7 @@
         "visible": true,
         "required": true,
         "type": "string",
-        "order": 0,
+        "order": 4,
         "enquote": false,
         "default": "100",
         "validator": ""
@@ -201,7 +201,7 @@
         "visible": true,
         "required": true,
         "type": "string",
-        "order": 0,
+        "order": 5,
         "enquote": false,
         "default": "100",
         "validator": ""
@@ -227,7 +227,7 @@
         "visible": true,
         "required": true,
         "type": "string",
-        "order": 0,
+        "order": 6,
         "enquote": false,
         "default": "1",
         "validator": ""
@@ -253,7 +253,7 @@
         "visible": true,
         "required": true,
         "type": "string",
-        "order": 0,
+        "order": 7,
         "enquote": false,
         "default": "1",
         "validator": ""
@@ -279,7 +279,7 @@
         "visible": true,
         "required": true,
         "type": "string",
-        "order": 0,
+        "order": 8,
         "enquote": false,
         "default": "",
         "validator": ""
@@ -305,7 +305,7 @@
         "visible": true,
         "required": true,
         "type": "string",
-        "order": 0,
+        "order": 9,
         "enquote": false,
         "default": "",
         "validator": ""
@@ -331,7 +331,7 @@
         "visible": true,
         "required": true,
         "type": "string",
-        "order": 0,
+        "order": 10,
         "enquote": false,
         "default": "30",
         "validator": ""
@@ -357,7 +357,7 @@
       "visible": true,
       "required": true,
       "type": "string",
-      "order": 0,
+      "order": 11,
       "enquote": false,
       "default": "1",
       "validator": ""
@@ -383,7 +383,7 @@
       "visible": true,
       "required": true,
       "type": "string",
-      "order": 0,
+      "order": 12,
       "enquote": false,
       "default": "",
       "validator": ""
@@ -409,7 +409,7 @@
       "visible": true,
       "required": true,
       "type": "string",
-      "order": 0,
+      "order": 13,
       "enquote": false,
       "default": "",
       "validator": ""
@@ -435,7 +435,7 @@
       "visible": true,
       "required": true,
       "type": "string",
-      "order": 0,
+      "order": 14,
       "enquote": false,
       "default": "64",
       "validator": ""

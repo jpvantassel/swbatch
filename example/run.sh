@@ -43,6 +43,7 @@ ellfnum=30
 # Run wrapper in  another directory
 # ---------------------------------
 other_dir=${SCRATCH}/swbatch/example
+rm -r ${other_dir}
 mkdir -p ${other_dir}
 cp -r 0_targets ${other_dir}/
 cp -r 1_parameters ${other_dir}/

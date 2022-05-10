@@ -23,12 +23,12 @@ rm -r 3_text
 
 # Set values in lieu of tapis input
 # ---------------------------------
-workingdirectory=.
+workingdirectory=$PWD
 name=example
-ntrial=3
+ntrial=2
 ns0=10000
 nr=100
-ns=50000
+ns=500
 nmodels=10
 nrayleigh=0
 nlove=0
@@ -40,16 +40,11 @@ ellfmin=0.2
 ellfmax=20
 ellfnum=30
 
-# Run wrapper in  another directory
-# ---------------------------------
-other_dir=${SCRATCH}/swbatch/example
-rm -r ${other_dir}
-mkdir -p ${other_dir}
-cp -r 0_targets ${other_dir}/
-cp -r 1_parameters ${other_dir}/
-cp ../swbatch.py ${other_dir}/
-cp ../swbatch.sh ${other_dir}/
-cp ../requirements.txt ${other_dir}/
-cd ${other_dir}
-source swbatch.sh
-
+# Run wrapper
+# -----------
+if [ -z "$SCRATCH" ];
+then
+  source ../swbatch_local.sh
+else
+  source ../swbatch.sh
+fi

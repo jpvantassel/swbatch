@@ -1,6 +1,6 @@
 # This file belongs to swbatch: a DesignSafe-CI application
 # for performing batch-style surface-wave inversions.
-# Copyright (C) 2019 - 2022 Joseph P. Vantassel (jvantassel@utexas.edu)
+# Copyright (C) 2019 - 2022 Joseph P. Vantassel (joseph.p.vantassel@gmail.com)
 
 # Prepare environment
 # -------------------

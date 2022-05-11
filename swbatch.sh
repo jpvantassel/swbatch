@@ -25,6 +25,7 @@ docker://jpvantassel/swbatch:geopsy-v3.4.2 \
 singularity exec \
 --cleanenv --containall \
 --bind $PWD:/home/user/analysis/ \
+--pwd /home/user/analysis \
 docker://jpvantassel/swbatch:geopsy-v3.4.2 \
 /home/user/venv/bin/python3 /home/user/swbatch.py --name ${name} \
 --ntrial ${ntrial} --ns0 ${ns0} --ns ${ns} --nr ${nr} --nmodels ${nmodels} \

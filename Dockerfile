@@ -11,16 +11,22 @@ RUN sudo apt update \
    python3-pip \
  && sudo apt clean
 
-ADD requirements.txt /home/user/
-
-RUN python3 -m pip install -r /home/user/requirements.txt \
- && rm requirements.txt
-
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
+
+SHELL ["/bin/bash", "-ec"]
+
+ADD requirements.txt /home/user/
+
+RUN python3 -m pip install virtualenv \
+ && python3 -m virtualenv /home/user/venv \ 
+ && source /home/user/venv/bin/activate \
+ && pip install -r /home/user/requirements.txt \
+ && rm /home/user/requirements.txt \
+ && mkdir /home/user/analysis/
 
 ADD swbatch.py /home/user/
 
 WORKDIR /home/user/
 
-CMD ["python3", "/home/user/swbatch.py", "--help"]
+CMD ["python3", "/home/user/analysis/swbatch.py", "--help"]

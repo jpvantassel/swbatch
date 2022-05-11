@@ -12,14 +12,21 @@ cd ${workingdirectory}
 module purge
 module load tacc-singularity
 
-# Pull singularity image
-# ----------------------
-singularity pull docker://jpvantassel/swbatch:geopsy-v3.4.2
+# Quick check of help
+# -------------------
+singularity exec \
+--cleanenv --containall \
+--bind $PWD:/home/user/analysis/ \
+docker://jpvantassel/swbatch:geopsy-v3.4.2 \
+/home/user/venv/bin/python3 /home/user/swbatch.py --help
 
 # Launch swbatch
 # --------------
-singularity run swbatch_geopsy-v3.4.2.sif \
-python3 /home/user/swbatch.py --name ${name} \
+singularity exec \
+--cleanenv --containall \
+--bind $PWD:/home/user/analysis/ \
+docker://jpvantassel/swbatch:geopsy-v3.4.2 \
+/home/user/venv/bin/python3 /home/user/swbatch.py --name ${name} \
 --ntrial ${ntrial} --ns0 ${ns0} --ns ${ns} --nr ${nr} --nmodels ${nmodels} \
 --nrayleigh ${nrayleigh} --nlove ${nlove} --dcfmin ${dcfmin} --dcfmax ${dcfmax} --dcfnum ${dcfnum} \
 --nellipticity ${nellipticity} --ellfmin ${ellfmin} --ellfmax ${ellfmax} --ellfnum ${ellfnum}

@@ -14,6 +14,7 @@ logging.basicConfig(filename="swbatch.log",
                     level=logging.DEBUG)
 logger = logging.getLogger('swbatch')
 
+__version__ = "0.3.1"
 
 @click.command()
 @click.option("--name", required=True, type=str, help="Analysis name that is brief, memorable, and descriptive. Each output file will begin with this string of characters. No spaces or special characters are permitted.")

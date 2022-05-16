@@ -1,36 +1,33 @@
 {
+  "id": "swbatch-0.4.1u0",
   "name": "swbatch",
-  "icon": null,
+  "version": "0.3.1",
+  "revision": 0,
+  "label": "swbatch v0.3.1 (geopsy v2.10.1)",
+  "shortDescription": "swbatch allows for the batch inversion of surface wave dispersion data using the dinver module of geopsy.",
+  "longDescription": "swbatch v0.3.1 executes on a single node of the Stampede2 cluster. swbatch v0.3.1 uses geopsy v2.10.1 as its inversion engine, therefore all .target and .param inversion input files must be created with a compatible version of geopsy. The best way to ensure compatible input files is to use the example inversion workflow provided with the latest version of the open-source Python package swprepost.",
+  "owner": "hgurram",
+  "isPublic": true,
+  "executionType": "HPC",
+  "executionSystem": "designsafe.community.exec.stampede2.nores",
+  "deploymentSystem": "designsafe.storage.default",
   "parallelism": "SERIAL",
   "defaultProcessorsPerNode": 64,
   "defaultMemoryPerNode": 1,
   "defaultNodeCount": 1,
   "defaultMaxRunTime": "48:00:00",
   "defaultQueue": "normal",
-  "version": "0.3.0rc0",
-  "isPublic": false,
-  "helpURI": "https://tinyurl.com/swbatch-readme",
-  "label": "SWbatch",
-  "owner": "hgurram",
-  "shortDescription": "SWbatch allows for the batch inversion of surface wave dispersion data using the Dinver module of Geopsy.",
-  "longDescription": "SWbatch is an application to rapidly perform multiple global-search inversions of experimental surface wave dispersion data with measures of uncertainty using the Neighborhood Algorithm as implemented in the Dinver module (Wathelet et al., 2004) of the open-source software Geopsy (www.geopsy.org). SWbatch allows the user to rapidly and conveniently invert experimental dispersion data considering multiple inversion parameterizations to address the problem's non-uniqueness and multiple trials per parameterization to address the problem's nonlinearity. To facilitate the potentially large amounts of pre- and post-processing required when performing batch surface-wave inversions a Python package, swprepost, has been released open-source. More information about SWbatch and swprepost can be found in the SWbatch documentation, link provided below.",
   "tags": [
     "DesignSafe",
     "hazards",
     "NHERI",
-    "desktop",
 	  "geopsy",
-	  "inversion",
-    "hideProcessorsPerNode",
-    "hideNodeCount",
-    "appCategory:Simulation",
-    "appIcon:"
+    "appCategory:Hazard Apps",
+    "appIcon:swbatch"
   ],
   "ontology": [],
-  "executionType": "HPC",
-  "executionSystem": "designsafe.community.exec.stampede2.nores",
-  "deploymentPath": "hgurram/swbatch",
-  "deploymentSystem": "designsafe.storage.default",
+  "helpURI": "https://github.com/jpvantassel/swbatch",
+  "deploymentPath": "/applications/swbatch-0.3.1u0.zip",
   "templatePath": "wrapper.sh",
   "testPath": "test/test.sh",
   "checkpointable": false,
@@ -72,7 +69,7 @@
         "visible": true,
         "required": true,
         "type": "string",
-        "order": 0,
+        "order": 1,
         "enquote": false,
         "default": "",
         "validator": ""
@@ -98,7 +95,7 @@
         "visible": true,
         "required": true,
         "type": "string",
-        "order": 0,
+        "order": 2,
         "enquote": false,
         "default": "3",
         "validator": ""
@@ -124,7 +121,7 @@
         "visible": true,
         "required": true,
         "type": "string",
-        "order": 0,
+        "order": 3,
         "enquote": false,
         "default": "250",
         "validator": ""
@@ -150,7 +147,7 @@
         "visible": true,
         "required": true,
         "type": "string",
-        "order": 0,
+        "order": 4,
         "enquote": false,
         "default": "10000",
         "validator": ""
@@ -176,7 +173,7 @@
         "visible": true,
         "required": true,
         "type": "string",
-        "order": 0,
+        "order": 5,
         "enquote": false,
         "default": "100",
         "validator": ""
@@ -202,7 +199,7 @@
         "visible": true,
         "required": true,
         "type": "string",
-        "order": 0,
+        "order": 6,
         "enquote": false,
         "default": "200",
         "validator": ""
@@ -228,7 +225,7 @@
         "visible": true,
         "required": true,
         "type": "string",
-        "order": 0,
+        "order": 7,
         "enquote": false,
         "default": "100",
         "validator": ""
@@ -254,7 +251,7 @@
         "visible": true,
         "required": true,
         "type": "string",
-        "order": 0,
+        "order": 8,
         "enquote": false,
         "default": "1",
         "validator": ""
@@ -280,7 +277,7 @@
         "visible": true,
         "required": true,
         "type": "string",
-        "order": 0,
+        "order": 9,
         "enquote": false,
         "default": "1",
         "validator": ""
@@ -306,7 +303,7 @@
         "visible": true,
         "required": true,
         "type": "string",
-        "order": 0,
+        "order": 10,
         "enquote": false,
         "default": "",
         "validator": ""
@@ -332,7 +329,7 @@
         "visible": true,
         "required": true,
         "type": "string",
-        "order": 0,
+        "order": 11,
         "enquote": false,
         "default": "",
         "validator": ""
@@ -358,7 +355,7 @@
         "visible": true,
         "required": true,
         "type": "string",
-        "order": 0,
+        "order": 12,
         "enquote": false,
         "default": "30",
         "validator": ""
@@ -384,7 +381,7 @@
       "visible": true,
       "required": true,
       "type": "string",
-      "order": 0,
+      "order": 13,
       "enquote": false,
       "default": "1",
       "validator": ""
@@ -410,7 +407,7 @@
       "visible": true,
       "required": true,
       "type": "string",
-      "order": 0,
+      "order": 14,
       "enquote": false,
       "default": "",
       "validator": ""
@@ -436,7 +433,7 @@
       "visible": true,
       "required": true,
       "type": "string",
-      "order": 0,
+      "order": 15,
       "enquote": false,
       "default": "",
       "validator": ""
@@ -462,7 +459,7 @@
       "visible": true,
       "required": true,
       "type": "string",
-      "order": 0,
+      "order": 16,
       "enquote": false,
       "default": "64",
       "validator": ""
@@ -484,6 +481,5 @@
   }
   ],
   "outputs": [],
-  "appCategory": "Simulation",
-  "appIcon": ""
+  "icon": null
 }

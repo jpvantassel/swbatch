@@ -14,6 +14,7 @@ logging.basicConfig(filename="swbatch.log",
                     level=logging.DEBUG)
 logger = logging.getLogger('swbatch')
 
+__version__ = "0.3.1"
 
 @click.command()
 @click.option("--name", required=True, type=str, help="Analysis name that is brief, memorable, and descriptive. Each output file will begin with this string of characters. No spaces or special characters are permitted.")
@@ -36,31 +37,31 @@ def swbatch(name, ntrial=3, it=250, ns0=10000, nr=100, ns=200, nmodels=100, nray
     """SWbatch: a tool for performing batch-style surface wave inversions.
 
     """
-    logger.info(f"Inputs:")
-    logger.info(f"name         = {name}")
-    logger.info(f"ntrial       = {ntrial}")
-    logger.info(f"it           = {it}")
-    logger.info(f"ns0          = {ns0}")
-    logger.info(f"nr           = {nr}")
-    logger.info(f"ns           = {ns}")
-    logger.info(f"nmodels      = {nmodels}")
-    logger.info(f"nrayleigh    = {nrayleigh}")
-    logger.info(f"nlove        = {nlove}")
-    logger.info(f"dcfmin       = {dcfmin}")
-    logger.info(f"dcfmax       = {dcfmax}")
-    logger.info(f"dcfnum       = {dcfnum}")
-    logger.info(f"nellipticity = {nellipticity}")
-    logger.info(f"ellfmin      = {ellfmin}")
-    logger.info(f"ellfmax      = {ellfmax}")
-    logger.info(f"ellfnum      = {ellfnum}")
+    logger.info("Inputs:")
+    logger.info("name         = {}".format(name))
+    logger.info("ntrial       = {}".format(ntrial))
+    logger.info("it           = {}".format(it))
+    logger.info("ns0          = {}".format(ns0))
+    logger.info("nr           = {}".format(nr))
+    logger.info("ns           = {}".format(ns))
+    logger.info("nmodels      = {}".format(nmodels))
+    logger.info("nrayleigh    = {}".format(nrayleigh))
+    logger.info("nlove        = {}".format(nlove))
+    logger.info("dcfmin       = {}".format(dcfmin))
+    logger.info("dcfmax       = {}".format(dcfmax))
+    logger.info("dcfnum       = {}".format(dcfnum))
+    logger.info("nellipticity = {}".format(nellipticity))
+    logger.info("ellfmin      = {}".format(ellfmin))
+    logger.info("ellfmax      = {}".format(ellfmax))
+    logger.info("ellfnum      = {}".format(ellfnum))
 
     # List of .target files in 0_targets directory.
     targets = glob.glob('0_targets/*.target')
-    logger.info(f"targets      = {targets}")
+    logger.info("targets      = {}".format(targets))
 
     # List of .param files in 1_parameters directory.
     params = glob.glob('1_parameters/*.param')
-    logger.info(f"params       = {params}")
+    logger.info("params       = {}".format(params))
 
     # Create directories if they do not yet exist.
     dirs = ["2_reports", "3_text"]
@@ -72,40 +73,40 @@ def swbatch(name, ntrial=3, it=250, ns0=10000, nr=100, ns=200, nmodels=100, nray
     for target in targets:
         for param in params:
             for trial in range(int(ntrial)):
-                logger.info(f"Starting: {target}, {param}, trial={trial}")
+                logger.info("Starting: {}, {}, {}".format(target, param, trial))
 
                 # Create default file name.
                 _, target_suffix = target.split("/")
                 _, param_suffix = param.split("/")
-                out = f"{name}_{target_suffix[:-7]}_{param_suffix[:-6]}_TR{trial}"
+                out = "{}_{}_{}_TR{}".format(name, target_suffix[:-7], param_suffix[:-6], trial)
 
                 # Perform surface wave inversion.
                 subprocess.run(["dinver", "-i", "DispersionCurve", "-optimization",
-                                "-itmax", it, "-ns0", ns0, "-ns", ns, "-nr", nr,
+                                "-itmax", str(it), "-ns0", str(ns0), "-ns", str(ns), "-nr", str(nr),
                                 "-target", target, "-param", param, "-f",
-                                "-o", f"2_reports/{out}.report"], check=True)
+                                "-o", "2_reports/{}.report".format(out)], check=True)
 
                 # Extract ground models.
-                with open(f"3_text/{out}_GM.txt", "w") as f:
+                with open("3_text/{}_GM.txt".format(out), "w") as f:
                     subprocess.run(["gpdcreport", "-best", nmodels,
-                                    f"2_reports/{out}.report"],
+                                    "2_reports/{}.report".format(out)],
                                    stdout=f, check=True)
 
                 # Calculate dispersion.
-                if nrayleigh == "0" and nlove == "0":
+                if str(nrayleigh) == "0" and str(nlove) == "0":
                     pass
                 else:                
-                    with open(f"3_text/{out}_DC.txt", "w") as f:
-                        subprocess.run(["gpdc", "-R", nrayleigh, "-L", nlove,
-                                        "-min", dcfmin, "-max", dcfmax, "-n", dcfnum,
-                                        f"3_text/{out}_GM.txt"], stdout=f, check=True)
+                    with open("3_text/{}_DC.txt".format(out), "w") as f:
+                        subprocess.run(["gpdc", "-R", str(nrayleigh), "-L", str(nlove),
+                                        "-min", str(dcfmin), "-max", str(dcfmax), "-n", str(dcfnum),
+                                        "3_text/{}_GM.txt".format(out)], stdout=f, check=True)
 
                 # Calculate ellipticity.
-                if nellipticity != "0":
-                    with open(f"3_text/{out}_ELL.txt", "w") as f:
-                        subprocess.run(["gpell", "-R", nellipticity,
-                                        "-min", ellfmin, "-max", ellfmax, "-n", ellfnum,
-                                        f"3_text/{out}_GM.txt"], stdout=f, check=True)
+                if str(nellipticity) != "0":
+                    with open("3_text/{}_ELL.txt".format(out), "w") as f:
+                        subprocess.run(["gpell", "-R", str(nellipticity),
+                                        "-min", str(ellfmin), "-max", str(ellfmax), "-n", str(ellfnum),
+                                        "3_text/{}_GM.txt".format(out)], stdout=f, check=True)
 
 
 if __name__ == "__main__":

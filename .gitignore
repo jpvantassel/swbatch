@@ -4,3 +4,5 @@ __pycache__
 swbatch.log
 2_reports
 3_text
+*.DS_Store
+*.ipynb_checkpoints

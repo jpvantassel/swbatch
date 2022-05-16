@@ -1,36 +1,35 @@
 {
+  "id": "swbatch-0.4.1u0",
   "name": "swbatch",
-  "icon": null,
+  "version": "0.4.1",
+  "revision": 0,
+  "label": "swbatch v0.4.1 (geopsy v3.4.2)",
+  "lastModified": "2022-04-25T11:49:38.000-05:00",
+  "shortDescription": "swbatch allows for the batch inversion of surface wave dispersion data using the dinver module of geopsy.",
+  "longDescription": "swbatch v0.4.1 executes on a single node of the Frontera cluster. swbatch v0.4.1 uses geopsy v3.4.2 as its inversion engine, therefore all .target and .param inversion input files must be created with a compatible version of geopsy. The best way to ensure compatible input files is to use the example inversion workflow provided with the latest version of the open-source Python package swprepost.",
+  "owner": "hgurram",
+  "isPublic": true,
+  "executionType": "HPC",
+  "executionSystem": "designsafe.community.exec.frontera.tg458981",
+  "deploymentSystem": "designsafe.storage.default",
+  "available": true,
   "parallelism": "SERIAL",
-  "defaultProcessorsPerNode": 64,
+  "defaultProcessorsPerNode": 56,
   "defaultMemoryPerNode": 1,
   "defaultNodeCount": 1,
   "defaultMaxRunTime": "48:00:00",
-  "defaultQueue": "normal",
-  "version": "0.3.0rc0",
-  "isPublic": false,
-  "helpURI": "https://tinyurl.com/swbatch-readme",
-  "label": "SWbatch",
-  "owner": "hgurram",
-  "shortDescription": "SWbatch allows for the batch inversion of surface wave dispersion data using the Dinver module of Geopsy.",
-  "longDescription": "SWbatch is an application to rapidly perform multiple global-search inversions of experimental surface wave dispersion data with measures of uncertainty using the Neighborhood Algorithm as implemented in the Dinver module (Wathelet et al., 2004) of the open-source software Geopsy (www.geopsy.org). SWbatch allows the user to rapidly and conveniently invert experimental dispersion data considering multiple inversion parameterizations to address the problem's non-uniqueness and multiple trials per parameterization to address the problem's nonlinearity. To facilitate the potentially large amounts of pre- and post-processing required when performing batch surface-wave inversions a Python package, swprepost, has been released open-source. More information about SWbatch and swprepost can be found in the SWbatch documentation, link provided below.",
+  "defaultQueue": "small",
   "tags": [
     "DesignSafe",
     "hazards",
     "NHERI",
-    "desktop",
-	  "geopsy",
-	  "inversion",
-    "hideProcessorsPerNode",
-    "hideNodeCount",
-    "appCategory:Simulation",
-    "appIcon:"
+    "geopsy",
+    "appCategory:Hazard Apps",
+    "appIcon:swbatch"
   ],
   "ontology": [],
-  "executionType": "HPC",
-  "executionSystem": "designsafe.community.exec.stampede2.nores",
-  "deploymentPath": "hgurram/swbatch",
-  "deploymentSystem": "designsafe.storage.default",
+  "helpURI": "https://github.com/jpvantassel/swbatch",
+  "deploymentPath": "/applications/swbatch-0.4.1u0.zip",
   "templatePath": "wrapper.sh",
   "testPath": "test/test.sh",
   "checkpointable": false,
@@ -44,7 +43,7 @@
         "required": true,
         "order": 0,
         "enquote": false,
-        "default": "agave://designsafe.storage.default/"
+        "default": ""
       },
       "details": {
         "label": "Working Directory",
@@ -98,7 +97,7 @@
         "visible": true,
         "required": true,
         "type": "string",
-        "order": 0,
+        "order": 1,
         "enquote": false,
         "default": "3",
         "validator": ""
@@ -119,71 +118,19 @@
       }
     },
     {
-      "id": "it",
-      "value": {
-        "visible": true,
-        "required": true,
-        "type": "string",
-        "order": 0,
-        "enquote": false,
-        "default": "250",
-        "validator": ""
-      },
-      "details": {
-        "label": "Number of iterations",
-        "description": "Number (positive integer) of Neighborhood-Algorithm iterations to perform per inversion. (250 is recommended)",
-        "argument": null,
-        "showArgument": false,
-        "repeatArgument": false
-      },
-      "semantics": {
-        "minCardinality": 1,
-        "maxCardinality": 1,
-        "ontology": [
-          "xs:string"
-        ]
-      }
-    },
-    {
       "id": "ns0",
       "value": {
         "visible": true,
         "required": true,
         "type": "string",
-        "order": 0,
+        "order": 2,
         "enquote": false,
         "default": "10000",
         "validator": ""
       },
       "details": {
-        "label": "Number of initial random samples",
-        "description": "Number (positive integer) of randomly sampled profiles to attempt before the first Neighborhood-Algorithm iteration. (10000 is recommended)",
-        "argument": null,
-        "showArgument": false,
-        "repeatArgument": false
-      },
-      "semantics": {
-        "minCardinality": 1,
-        "maxCardinality": 1,
-        "ontology": [
-          "xs:string"
-        ]
-      }
-    },
-    {
-      "id": "nr",
-      "value": {
-        "visible": true,
-        "required": true,
-        "type": "string",
-        "order": 0,
-        "enquote": false,
-        "default": "100",
-        "validator": ""
-      },
-      "details": {
-        "label": "Number of profiles to consider when resampling",
-        "description": "Number (positive integer) of best profiles to consider when resampling. (100 is recommended)",
+        "label": "Number of initial random models",
+        "description": "Number (positive integer) of randomly sampled models to attempt before the first Neighborhood-Algorithm iteration. (10000 is recommended)",
         "argument": null,
         "showArgument": false,
         "repeatArgument": false
@@ -202,14 +149,40 @@
         "visible": true,
         "required": true,
         "type": "string",
-        "order": 0,
+        "order": 3,
         "enquote": false,
-        "default": "200",
+        "default": "50000",
         "validator": ""
       },
       "details": {
-        "label": "Number of profiles per iteration",
-        "description": "Number (positive integer) of new profiles to consider per Neighborhood-Algorithm iteration. (200 is recommended)",
+        "label": "Number of Neighborhood models",
+        "description": "Number (positive integer) of Neighborhood-Algorithm-selected models to consider per inversion. (50000 is recommended)",
+        "argument": null,
+        "showArgument": false,
+        "repeatArgument": false
+      },
+      "semantics": {
+        "minCardinality": 1,
+        "maxCardinality": 1,
+        "ontology": [
+          "xs:string"
+        ]
+      }
+    },
+    {
+      "id": "nr",
+      "value": {
+        "visible": true,
+        "required": true,
+        "type": "string",
+        "order": 4,
+        "enquote": false,
+        "default": "100",
+        "validator": ""
+      },
+      "details": {
+        "label": "Number of best models to consider when resampling",
+        "description": "Number (positive integer) of best models to consider when resampling. (100 is recommended)",
         "argument": null,
         "showArgument": false,
         "repeatArgument": false
@@ -228,7 +201,7 @@
         "visible": true,
         "required": true,
         "type": "string",
-        "order": 0,
+        "order": 5,
         "enquote": false,
         "default": "100",
         "validator": ""
@@ -254,7 +227,7 @@
         "visible": true,
         "required": true,
         "type": "string",
-        "order": 0,
+        "order": 6,
         "enquote": false,
         "default": "1",
         "validator": ""
@@ -280,7 +253,7 @@
         "visible": true,
         "required": true,
         "type": "string",
-        "order": 0,
+        "order": 7,
         "enquote": false,
         "default": "1",
         "validator": ""
@@ -306,7 +279,7 @@
         "visible": true,
         "required": true,
         "type": "string",
-        "order": 0,
+        "order": 8,
         "enquote": false,
         "default": "",
         "validator": ""
@@ -332,7 +305,7 @@
         "visible": true,
         "required": true,
         "type": "string",
-        "order": 0,
+        "order": 9,
         "enquote": false,
         "default": "",
         "validator": ""
@@ -358,7 +331,7 @@
         "visible": true,
         "required": true,
         "type": "string",
-        "order": 0,
+        "order": 10,
         "enquote": false,
         "default": "30",
         "validator": ""
@@ -379,111 +352,134 @@
       }
     },
     {
-    "id": "nellipticity",
-    "value": {
-      "visible": true,
-      "required": true,
-      "type": "string",
-      "order": 0,
-      "enquote": false,
-      "default": "1",
-      "validator": ""
+      "id": "nellipticity",
+      "value": {
+        "visible": true,
+        "required": true,
+        "type": "string",
+        "order": 11,
+        "enquote": false,
+        "default": "1",
+        "validator": ""
+      },
+      "details": {
+        "label": "Number of Rayleigh modes to include in exported ellipticity",
+        "description": "Number (positive integer) of Rayleigh modes to include in exported ellipticity. If no ellipticity curves are desired set this value to 0. (1 is recommended)",
+        "argument": null,
+        "showArgument": false,
+        "repeatArgument": false
+      },
+      "semantics": {
+        "minCardinality": 1,
+        "maxCardinality": 1,
+        "ontology": [
+          "xs:string"
+        ]
+      }
     },
-    "details": {
-      "label": "Number of Rayleigh modes to include in exported ellipticity",
-      "description": "Number (positive integer) of Rayleigh modes to include in exported ellipticity. If no ellipticity curves are desired set this value to 0. (1 is recommended)",
-      "argument": null,
-      "showArgument": false,
-      "repeatArgument": false
+    {
+      "id": "ellfmin",
+      "value": {
+        "visible": true,
+        "required": true,
+        "type": "string",
+        "order": 12,
+        "enquote": false,
+        "default": "",
+        "validator": ""
+      },
+      "details": {
+        "label": "Minimum frequency of exported Rayleigh wave ellipticity in Hz",
+        "description": "Number (positive float) for minimum frequency of exported Rayleigh wave ellipticity curve(s) in Hz. Selecting a value less than the site's resonant frequency is recommended.",
+        "argument": null,
+        "showArgument": false,
+        "repeatArgument": false
+      },
+      "semantics": {
+        "minCardinality": 1,
+        "maxCardinality": 1,
+        "ontology": [
+          "xs:string"
+        ]
+      }
     },
-    "semantics": {
-      "minCardinality": 1,
-      "maxCardinality": 1,
-      "ontology": [
-        "xs:string"
-      ]
+    {
+      "id": "ellfmax",
+      "value": {
+        "visible": true,
+        "required": true,
+        "type": "string",
+        "order": 13,
+        "enquote": false,
+        "default": "",
+        "validator": ""
+      },
+      "details": {
+        "label": "Maximum frequency of exported Rayleigh wave ellipticity curve(s) in Hz",
+        "description": "Number (positive float) for maximum frequency of exported Rayleigh wave ellipticity curve(s) in Hz. Selecting a value greater than the site's resonant frequency is recommended.",
+        "argument": null,
+        "showArgument": false,
+        "repeatArgument": false
+      },
+      "semantics": {
+        "minCardinality": 1,
+        "maxCardinality": 1,
+        "ontology": [
+          "xs:string"
+        ]
+      }
+    },
+    {
+      "id": "ellfnum",
+      "value": {
+        "visible": true,
+        "required": true,
+        "type": "string",
+        "order": 14,
+        "enquote": false,
+        "default": "64",
+        "validator": ""
+      },
+      "details": {
+        "label": "Number of frequency points in exported Rayleigh wave ellipticity curve(s)",
+        "description": "Number (positive integer) of frequency points in exported Rayleigh wave ellipticity curve(s). (64 is recommended)",
+        "argument": null,
+        "showArgument": false,
+        "repeatArgument": false
+      },
+      "semantics": {
+        "minCardinality": 1,
+        "maxCardinality": 1,
+        "ontology": [
+          "xs:string"
+        ]
+      }
     }
-  },
-  {
-    "id": "ellfmin",
-    "value": {
-      "visible": true,
-      "required": true,
-      "type": "string",
-      "order": 0,
-      "enquote": false,
-      "default": "",
-      "validator": ""
-    },
-    "details": {
-      "label": "Minimum frequency of exported Rayleigh wave ellipticity in Hz",
-      "description": "Number (positive float) for minimum frequency of exported Rayleigh wave ellipticity curve(s) in Hz. Selecting a value less than the site's resonant frequency is recommended.",
-      "argument": null,
-      "showArgument": false,
-      "repeatArgument": false
-    },
-    "semantics": {
-      "minCardinality": 1,
-      "maxCardinality": 1,
-      "ontology": [
-        "xs:string"
-      ]
-    }
-  },
-  {
-    "id": "ellfmax",
-    "value": {
-      "visible": true,
-      "required": true,
-      "type": "string",
-      "order": 0,
-      "enquote": false,
-      "default": "",
-      "validator": ""
-    },
-    "details": {
-      "label": "Maximum frequency of exported Rayleigh wave ellipticity curve(s) in Hz",
-      "description": "Number (positive float) for maximum frequency of exported Rayleigh wave ellipticity curve(s) in Hz. Selecting a value greater than the site's resonant frequency is recommended.",
-      "argument": null,
-      "showArgument": false,
-      "repeatArgument": false
-    },
-    "semantics": {
-      "minCardinality": 1,
-      "maxCardinality": 1,
-      "ontology": [
-        "xs:string"
-      ]
-    }
-  },
-  {
-    "id": "ellfnum",
-    "value": {
-      "visible": true,
-      "required": true,
-      "type": "string",
-      "order": 0,
-      "enquote": false,
-      "default": "64",
-      "validator": ""
-    },
-    "details": {
-      "label": "Number of frequency points in exported Rayleigh wave ellipticity curve(s)",
-      "description": "Number (positive integer) of frequency points in exported Rayleigh wave ellipticity curve(s). (64 is recommended)",
-      "argument": null,
-      "showArgument": false,
-      "repeatArgument": false
-    },
-    "semantics": {
-      "minCardinality": 1,
-      "maxCardinality": 1,
-      "ontology": [
-        "xs:string"
-      ]
-    }
-  }
   ],
   "outputs": [],
-  "appCategory": "Simulation",
-  "appIcon": ""
+  "uuid": "5636282624302968340-242ac116-0001-005",
+  "icon": null,
+  "_links": {
+    "self": {
+      "href": "https://agave.designsafe-ci.org/apps/v2/swbatch-0.4.1u0"
+    },
+    "executionSystem": {
+      "href": "https://agave.designsafe-ci.org/systems/v2/designsafe.community.exec.frontera.tg458981"
+    },
+    "storageSystem": {
+      "href": "https://agave.designsafe-ci.org/systems/v2/designsafe.storage.default"
+    },
+    "history": {
+      "href": "https://agave.designsafe-ci.org/apps/v2/swbatch-0.4.1u0/history"
+    },
+    "metadata": {
+      "href": "https://agave.designsafe-ci.org/meta/v2/data/?q=%7B%22associationIds%22%3A%225636282624302968340-242ac116-0001-005%22%7D"
+    },
+    "owner": {
+      "href": "https://agave.designsafe-ci.org/profiles/v2/hgurram"
+    },
+    "permissions": {
+      "href": "https://agave.designsafe-ci.org/apps/v2/swbatch-0.4.1u0/pems"
+    }
+  }
 }

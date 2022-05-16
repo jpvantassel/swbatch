@@ -1,6 +1,6 @@
 # This file belongs to swbatch: a DesignSafe-CI application
 # for performing batch-style surface-wave inversions.
-# Copyright (C) 2019 - 2022 Joseph P. Vantassel (jvantassel@utexas.edu)
+# Copyright (C) 2019 - 2022 Joseph P. Vantassel (joseph.p.vantassel@gmail.com)
 
 import os
 import subprocess
@@ -15,15 +15,15 @@ logging.basicConfig(filename="swbatch.log",
                     level=logging.DEBUG)
 logger = logging.getLogger('swbatch')
 
+__version__ = "0.4.1"
 
 @click.command()
 @click.option("--name", required=True, type=str, help="Analysis name that is brief, memorable, and descriptive. Each output file will begin with this string of characters. No spaces or special characters are permitted.")
 @click.option("--ntrial", required=True, type=str, default=3, help="Number (positive integer) of inversion trials to perform per parameterization. (3 is recommended)")
-@click.option("--it", required=False, type=str, default=None, help="Deprecated in Geopsy v3.0.0 and later, see `ns` for details.")
-@click.option("--ns0", required=True, type=str, default=10000, help="Number (positive integer) of randomly sampled profiles to attempt before the first Neighborhood-Algorithm iteration. (10000 is recommended)")
-@click.option("--nr", required=True, type=str, default=100, help="Number (positive integer) of best profiles to consider when resampling. (100 is recommended)")
-@click.option("--ns", required=True, type=str, default=200, help="Number (positive integer) of profiles to consider. In versions of Geopsy prior to v3.0.0 this was equal to `it`*`ns`. (50000 is recommended)")
-@click.option("--nmodels", required=True, type=str, default=50000, help="Number (positive integer) of ground models/dispersion curves/ellipticity curves to export. (100 is recommended)")
+@click.option("--ns0", required=True, type=str, default=10000, help="Number (positive integer) of randomly sampled models to attempt before the first Neighborhood-Algorithm iteration. (10000 is recommended)")
+@click.option("--ns", required=True, type=str, default=50000, help="Number (positive integer) of models to consider. In versions of Geopsy prior to v3.0.0 this was equal to `it`*`ns`. (50000 is recommended)")
+@click.option("--nr", required=True, type=str, default=100, help="Number (positive integer) of best models to consider when resampling. (100 is recommended)")
+@click.option("--nmodels", required=True, type=str, default=100, help="Number (positive integer) of ground models/dispersion curves/ellipticity curves to export. (100 is recommended)")
 @click.option("--nrayleigh", required=True, type=str, default=1, help="Number (positive integer) of Rayleigh wave modes to export. (1 is recommended)")
 @click.option("--nlove", required=True, type=str, default=1, help="Number (positive integer) of Love wave modes to export. (1 is recommended)")
 @click.option("--dcfmin", required=True, type=str, default=0.2, help="Number (positive float) for minimum frequency of exported dispersion curve(s) in Hz. Selecting a value slightly less than the minimum frequency of your experimental dispersion data is recommended.")
@@ -33,17 +33,15 @@ logger = logging.getLogger('swbatch')
 @click.option("--ellfmin", required=True, type=str, default=0.2, help="Number (positive float) for minimum frequency of exported Rayleigh wave ellipticity curve(s) in Hz. Selecting a value less than the site's resonant frequency is recommended.")
 @click.option("--ellfmax", required=True, type=str, default=20, help="Number (positive float) for maximum frequency of exported Rayleigh wave ellipticity curve(s) in Hz. Selecting a value greater than the site's resonant frequency is recommended.")
 @click.option("--ellfnum", required=True, type=str, default=64, help="Number of frequency points in exported Rayleigh wave ellipticity curve(s). (30 is recommended)")
-def swbatch(name, ntrial=3, it=250, ns0=10000, nr=100, ns=200, nmodels=100, nrayleigh=1, nlove=1, dcfmin=0.2, dcfmax=20, dcfnum=30, nellipticity=1, ellfmin=0.2, ellfmax=20, ellfnum=64):
-    """SWbatch: a tool for performing batch-style surface wave inversions.
-
-    """
+def swbatch(name, ntrial=3, ns0=10000, ns=50000, nr=100, nmodels=100, nrayleigh=1, nlove=1, dcfmin=0.2, dcfmax=20, dcfnum=30, nellipticity=1, ellfmin=0.2, ellfmax=20, ellfnum=64):
+    """SWbatch: a tool for performing batch-style surface wave inversions."""
+    logger.info(f"swbatch version v{__version__}")
     logger.info(f"Inputs:")
     logger.info(f"name         = {name}")
     logger.info(f"ntrial       = {ntrial}")
-    logger.info(f"it           = {it}")
     logger.info(f"ns0          = {ns0}")
-    logger.info(f"nr           = {nr}")
     logger.info(f"ns           = {ns}")
+    logger.info(f"nr           = {nr}")
     logger.info(f"nmodels      = {nmodels}")
     logger.info(f"nrayleigh    = {nrayleigh}")
     logger.info(f"nlove        = {nlove}")
@@ -55,10 +53,7 @@ def swbatch(name, ntrial=3, it=250, ns0=10000, nr=100, ns=200, nmodels=100, nray
     logger.info(f"ellfmax      = {ellfmax}")
     logger.info(f"ellfnum      = {ellfnum}")
 
-    # Add warnings, after switching swbatch form Geopsy v2.10.1 to v3.4.2. 
-    if it is not None:
-        warnings.warn("The variable `it` is deprecated in Geopsy v3.0.0 and later, see `ns` for details.")
-
+    # Add warnings, after switching swbatch from geopsy v2.10.1 to v3.4.2. 
     if int(ns) < 10000:
         warnings.warn("The variable `ns` is less than 10000, searching so few models will likely result in low-quality inversion results.")
 
@@ -70,7 +65,7 @@ def swbatch(name, ntrial=3, it=250, ns0=10000, nr=100, ns=200, nmodels=100, nray
     params = glob.glob('1_parameters/*.param')
     logger.info(f"params       = {params}")
 
-    # Create directories if they do not yet exist.
+    # Create output directories if they do not yet exist.
     dirs = ["2_reports", "3_text"]
     for _dir in dirs:
         if not os.path.isdir(_dir):
@@ -114,7 +109,6 @@ def swbatch(name, ntrial=3, it=250, ns0=10000, nr=100, ns=200, nmodels=100, nray
                         subprocess.run(["gpell", "-R", nellipticity,
                                         "-min", ellfmin, "-max", ellfmax, "-n", ellfnum,
                                         f"3_text/{out}_gm.txt"], stdout=f, check=True)
-
 
 if __name__ == "__main__":
     swbatch()

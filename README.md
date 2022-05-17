@@ -8,8 +8,8 @@
 
 _swbatch_ is a user-friendly, web-based application hosted on the
 DesignSafe-CyberInfrastructure for performing batch-style surface wave
-inversions using the dinver module of the open-source software
-[geopsy](http://geopsy.org/). _swbatch_ allows the user to rapidly and
+inversions using the _dinver_ module of the open-source software
+_[geopsy](http://geopsy.org/)_. _swbatch_ allows the user to rapidly and
 conveniently invert experimental dispersion data considering multiple inversion
 parameterizations to address the problem’s non-uniqueness and multiple trials
 per parameterization to address the problem’s nonlinearity as detailed in the

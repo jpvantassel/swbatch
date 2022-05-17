@@ -1,54 +1,50 @@
-# This file belongs to SWbatch: a DesignSafe-CI application
+#!/bin/bash
+# This file belongs to swbatch: A DesignSafe-CI application
 # for performing batch-style surface-wave inversions.
-# Copyright (C) 2019 - 2021 Joseph P. Vantassel (jvantassel@utexas.edu)
+# Copyright (C) 2019 - 2022 Joseph P. Vantassel (jvantassel@utexas.edu)
 
-# Clean up
+#SBATCH -J swbatch_example       # Job name
+#SBATCH -o swbatch_example.o%j   # Name of stdout output file
+#SBATCH -e swbatch_example.e%j   # Name of stderr error file
+#SBATCH -p small                 # Queue (partition) name
+#SBATCH -N 1                     # Total # of nodes (must be 1 for serial)
+#SBATCH -n 1                     # Total # of mpi tasks (should be 1 for serial)
+#SBATCH -t 03:00:00              # Run time (hh:mm:ss)
+
+# Start
+# -----
+# print commands as executed
+set -x
+
+# Clean up prior run if necessary
+# -------------------------------
 rm -r 2_reports
 rm -r 3_text
 
-# Set values in lieu of Tapis input
-workingdirectory=.
-name=test
+# Set values in lieu of tapis input
+# ---------------------------------
+workingdirectory=$PWD
+name=example
 ntrial=2
-it=10
-ns0=1000
+ns0=10000
 nr=100
-ns=10
+ns=500
 nmodels=10
-nrayleigh=1
-nlove=1
+nrayleigh=0
+nlove=0
 dcfnum=20
 dcfmin=0.2
 dcfmax=20
-nellipticity=1
+nellipticity=0
 ellfmin=0.2
 ellfmax=20
 ellfnum=30
 
-# Setup
-set -x
-WRAPPERDIR=$( cd "$( dirname "$0" )" && pwd )
-cd ${workingdirectory} 
-
-# Load python3
-module load python3
-
-# Install requirements 
-pip3 install --user -r ../requirements.txt
-
-# Setpath to Geopsy Install
-PATH=$PATH:/work/01698/rauta/geopsy/install/bin/
-
-# Launch swbatch
-python3 ../swbatch.py --name ${name} --ntrial ${ntrial} --it ${it}\
- --ns0 ${ns0} --nr ${nr} --ns ${ns} --nmodels ${nmodels} --nrayleigh ${nrayleigh}\
- --nlove ${nlove} --dcfmin ${dcfmin} --dcfmax ${dcfmax} --dcfnum ${dcfnum}\
- --nellipticity ${nellipticity} --ellfmin ${ellfmin} --ellfmax ${ellfmax}\
- --ellfnum ${ellfnum}
-
-# Callback failure
-if [ ! $? ]; then
-        echo "SWbatch exited with an error status. $?" >&2
-        ${AGAVE_JOB_CALLBACK_FAILURE}
-        exit
+# Run wrapper
+# -----------
+if [ -z "$SCRATCH" ];
+then
+  source ../swbatch_local.sh
+else
+  source ../swbatch.sh
 fi

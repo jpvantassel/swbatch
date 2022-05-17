@@ -59,11 +59,11 @@ def swbatch(name, ntrial=3, ns0=10000, ns=50000, nr=100, nmodels=100, nrayleigh=
 
     # List of .target files in 0_targets directory.
     targets = glob.glob('0_targets/*.target')
-    logger.info(f"targets      = {targets}")
+    logger.info("targets      = {}".format(targets))
 
     # List of .param files in 1_parameters directory.
     params = glob.glob('1_parameters/*.param')
-    logger.info(f"params       = {params}")
+    logger.info("params       = {}".format(params))
 
     # Create output directories if they do not yet exist.
     dirs = ["2_reports", "3_text"]
@@ -75,7 +75,7 @@ def swbatch(name, ntrial=3, ns0=10000, ns=50000, nr=100, nmodels=100, nrayleigh=
     for target in targets:
         for param in params:
             for trial in range(int(ntrial)):
-                logger.info(f"Starting: {target}, {param}, trial={trial}")
+                logger.info("Starting: {}, {}, {}".format(target, param, trial))
 
                 # Create default file name.
                 _, target_suffix = target.split("/")
@@ -86,16 +86,16 @@ def swbatch(name, ntrial=3, ns0=10000, ns=50000, nr=100, nmodels=100, nrayleigh=
                 subprocess.run(["dinver", "-i", "DispersionCurve", "-optimization",
                                 "-ns0", ns0, "-ns", ns, "-nr", nr,
                                 "-target", target, "-param", param, "-f",
-                                "-o", f"2_reports/{out}.report"], check=True)
+                                "-o", "2_reports/{}.report".format(out)], check=True)
 
                 # Extract ground models.
                 with open(f"3_text/{out}_gm.txt", "w") as f:
                     subprocess.run(["gpdcreport", "-best", nmodels,
-                                    f"2_reports/{out}.report"],
+                                    "2_reports/{}.report".format(out)],
                                    stdout=f, check=True)
 
                 # Calculate dispersion.
-                if nrayleigh == "0" and nlove == "0":
+                if str(nrayleigh) == "0" and str(nlove) == "0":
                     pass
                 else:                
                     with open(f"3_text/{out}_dc.txt", "w") as f:

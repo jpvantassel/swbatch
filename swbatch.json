@@ -71,7 +71,7 @@
         "visible": true,
         "required": true,
         "type": "string",
-        "order": 0,
+        "order": 1,
         "enquote": false,
         "default": "",
         "validator": ""
